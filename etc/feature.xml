@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="@{eplugin.id}"
+      label="%featureName"
+      version="@{eplugin.version}"
+      provider-name="%featureProvider"
+      plugin="@{eplugin.id}">
+
+   <description url="http://cup-lex-eclipse.sourceforge.net/">
+      %featureDescription
+   </description>
+
+   <copyright url="http://cup-lex-eclipse.sourceforge.net/">
+      %featureProvider
+   </copyright>
+
+   <license url="http://cup-lex-eclipse.sourceforge.net/">
+      %featureLicense
+   </license>
+
+   <url>
+      <update label="%featureSite" url="http://cup-lex-eclipse.sourceforge.net/update"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.jdt" version="@{eclipse.version}" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="@{eplugin.id}"
+         download-size="0"
+         install-size="0"
+         version="@{eplugin.version}"
+		unpack="false"
+		/>
+
+</feature>

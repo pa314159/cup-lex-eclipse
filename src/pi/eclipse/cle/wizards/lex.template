@@ -1,0 +1,100 @@
+
+#if( $PACKAGE )
+package $PACKAGE;
+#end
+
+import java_cup.runtime.*;
+import java.io.IOException;
+
+#if( $CUP )
+#if( $PACKAGE )
+import static $PACKAGE.$SYM_CLASS.*;
+#else
+import static $SYM_CLASS.*;
+#end
+#else
+#if( $PACKAGE )
+// import static $PACKAGE.$SYM_CLASS.*;
+#else
+// import static $SYM_CLASS.*;
+#end
+#end
+
+%%
+
+%class $CLASS
+
+#if( $UNICODE )
+%unicode
+#else
+// %unicode
+#end
+#if( $LINE )
+%line
+#else
+// %line
+#end
+#if( $COLUMN )
+%column
+#else
+// %column
+#end
+
+#if( $PUBLIC )
+%public
+#else
+// %public
+#end
+#if( $FINAL )
+%final
+#else
+// %final
+#end
+#if( $ABSTRACT )
+%abstract
+#else
+// %abstract
+#end
+
+#if( $CUP )
+%cupsym $SYM_CLASS
+%cup
+#if( $CUP_DEBUG )
+%cupdebug
+#else
+// %cupdebug
+#end
+#else
+// %cupsym $SYM_CLASS
+// %cup
+// %cupdebug
+#end
+
+%init{
+	// TODO: code that goes to constructor
+%init}
+
+%{
+	private Symbol sym(int type)
+	{
+		return sym(type, yytext());
+	}
+
+	private Symbol sym(int type, Object value)
+	{
+		return new Symbol(type, yyline, yycolumn, value);
+	}
+
+	private void error()
+	throws IOException
+	{
+		throw new IOException("illegal text at line = "+yyline+", column = "+yycolumn+", text = '"+yytext()+"'");
+	}
+%}
+
+ANY			=	.
+
+%%
+
+{ANY}		{	return sym(ANY); }
+
