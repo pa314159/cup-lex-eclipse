@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>signum</groupId>
+		<artifactId>defaults</artifactId>
+		<version>0.24-SNAPSHOT</version>
+	</parent>
+	<groupId>cup-lex-edit</groupId>
+	<artifactId>cup-lex-edit</artifactId>
+	<name>cup-lex-edit</name>
+	<version>0.5.4-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>maven</groupId>
+				<artifactId>maven-osgi-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>0.8-SNAPSHOT</version>
+				<configuration>
+					<manifestFile>META-INF/MANIFEST.MF</manifestFile>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
