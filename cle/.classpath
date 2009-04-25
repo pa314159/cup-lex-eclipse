@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="output/generated"/>
+	<classpathentry kind="lib" path="lib/jflex-1.4.1.jar" sourcepath="/opt/java/jflex-1.4.1/src"/>
+	<classpathentry kind="lib" path="lib/java-cup-11.jar" sourcepath="/opt/java/jcup-11a/src"/>
+	<classpathentry exported="true" kind="lib" path="lib/velocity-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/velocity-dep-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.12.jar" sourcepath="/opt/java/log4j-1.2.12/src/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="output/classes"/>
+</classpath>

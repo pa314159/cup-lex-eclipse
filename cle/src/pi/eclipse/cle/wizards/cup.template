@@ -1,0 +1,24 @@
+
+#if( $PACKAGE )
+package $PACKAGE;
+#end
+
+import java_cup.runtime.*;
+
+parser code
+{:
+:}
+
+action code
+{:
+:}
+
+terminal		ANY;
+
+non terminal	grammar;
+
+grammar			::=	ANY
+				{:
+				:}
+				
+				;
