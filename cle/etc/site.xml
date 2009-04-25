@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/@{eplugin.id}_@{eplugin.version}.jar" id="@{eplugin.id}" version="@{eplugin.version}">
-      <category name="@{eplugin.id}"/>
-   </feature>
-   
-   <category-def name="@{eplugin.id}" label="CUP/LEX For Eclipse"/>
-
-</site>
