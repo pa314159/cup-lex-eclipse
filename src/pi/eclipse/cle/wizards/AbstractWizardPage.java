@@ -45,6 +45,15 @@ implements WidgetListener
 	}
 
 	/**
+	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
+	 */
+	public void updateContainer( String status )
+	{
+		setErrorMessage( status );
+		setPageComplete( status == null );
+	}
+
+	/**
 	 * @param container
 	 *            TODO
 	 * @param parent
@@ -54,15 +63,6 @@ implements WidgetListener
 
 	protected void finishWizard()
 	{
-	}
-
-	/**
-	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
-	 */
-	public void updateContainer( String status )
-	{
-		setErrorMessage( status );
-		setPageComplete( status == null );
 	}
 
 }

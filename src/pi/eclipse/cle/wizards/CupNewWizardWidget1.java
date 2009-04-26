@@ -109,19 +109,47 @@ extends AbstractWidget
 	}
 
 	/**
-	 * @return
+	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
 	 */
-	String getFileName()
+	@Override
+	public void updateWidgetContainer()
 	{
-		return this.txFileName.getText().replaceAll( "\\.cup$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
-	}
+		if( this.txFolder.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
 
-	/**
-	 * @return
-	 */
-	IContainer getFolder()
-	{
-		return this.resFolder;
+			return;
+		}
+
+		final String fileName = this.txFileName.getText();
+
+		if( fileName.length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".cup" ) ) { //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "cup-ext-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		final IContainer folder = getFolder();
+		final IResource resource = folder != null ? folder.findMember( getFileName() + ".cup" ) : null; //$NON-NLS-1$
+
+		if( (resource != null) && resource.exists() ) {
+			fireWidgetModified( CleStrings.get( "resource-exists", getFileName() ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( this.txJavaFolder.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		fireWidgetModified( null );
 	}
 
 	/**
@@ -357,47 +385,19 @@ extends AbstractWidget
 	}
 
 	/**
-	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
+	 * @return
 	 */
-	@Override
-	public void updateWidgetContainer()
+	String getFileName()
 	{
-		if( this.txFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
+		return this.txFileName.getText().replaceAll( "\\.cup$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 
-			return;
-		}
-
-		final String fileName = this.txFileName.getText();
-
-		if( fileName.length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( fileName.lastIndexOf( '.' ) >= 0 && !fileName.endsWith( ".cup" ) ) { //$NON-NLS-1$
-			fireWidgetModified( CleStrings.get( "cup-ext-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		final IContainer folder = getFolder();
-		final IResource resource = folder != null ? folder.findMember( getFileName() + ".cup" ) : null; //$NON-NLS-1$
-
-		if( resource != null && resource.exists() ) {
-			fireWidgetModified( CleStrings.get( "resource-exists", getFileName() ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( this.txJavaFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		fireWidgetModified( null );
+	/**
+	 * @return
+	 */
+	IContainer getFolder()
+	{
+		return this.resFolder;
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"

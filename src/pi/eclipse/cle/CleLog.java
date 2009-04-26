@@ -114,35 +114,6 @@ public class CleLog
 	}
 
 	/**
-	 * @param l
-	 * @param s
-	 * @param o
-	 *            TODO
-	 */
-	void log( Level l, String s, Object[] o )
-	{
-		log( l, null, s, o );
-	}
-
-	/**
-	 * @param l
-	 * @param t
-	 * @param s
-	 * @param o
-	 *            TODO
-	 */
-	void log( Level l, Throwable t, String s, Object[] o )
-	{
-		if( ClePlugin.isLogEnabled() && this.L.isEnabledFor( l ) ) {
-			final Formatter f = new Formatter();
-
-			f.format( s, o );
-
-			this.L.log( FQCN, l, f, t );
-		}
-	}
-
-	/**
 	 * @param s
 	 * @param o
 	 *            TODO
@@ -182,5 +153,34 @@ public class CleLog
 	public void warn( Throwable t, String s, Object... o )
 	{
 		log( Level.WARN, t, s, o );
+	}
+
+	/**
+	 * @param l
+	 * @param s
+	 * @param o
+	 *            TODO
+	 */
+	void log( Level l, String s, Object[] o )
+	{
+		log( l, null, s, o );
+	}
+
+	/**
+	 * @param l
+	 * @param t
+	 * @param s
+	 * @param o
+	 *            TODO
+	 */
+	void log( Level l, Throwable t, String s, Object[] o )
+	{
+		if( ClePlugin.isLogEnabled() && this.L.isEnabledFor( l ) ) {
+			final Formatter f = new Formatter();
+
+			f.format( s, o );
+
+			this.L.log( FQCN, l, f, t );
+		}
 	}
 }

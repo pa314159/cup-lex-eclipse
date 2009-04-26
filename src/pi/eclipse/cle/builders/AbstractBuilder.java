@@ -172,6 +172,73 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	final Map		processData	= new HashMap();
 
 	/**
+	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
+	 */
+	public void handleDebugEvents( DebugEvent[] events )
+	{
+		for( int k = 0; k < events.length; k++ ) {
+			if( events[k].getKind() != DebugEvent.TERMINATE ) {
+				continue;
+			}
+
+			if( !(events[k].getSource() instanceof IProcess) ) {
+				continue;
+			}
+
+			final IProcess p = (IProcess) events[k].getSource();
+			final String n = p.getLaunch().getLaunchConfiguration().getName();
+			final ProcessData d = (ProcessData) this.processData.get( n );
+
+			if( d == null ) {
+				continue;
+			}
+
+			try {
+				collectErrors( d.preferences.findResource(), d.out.toCharArray() );
+			}
+			catch( final IOException e ) {
+				addError( d.preferences.findResource(), e.getLocalizedMessage(), 0 );
+			}
+			finally {
+				this.processData.remove( n );
+
+				try {
+					d.preferences.getEclipseProject().refreshLocal( IResource.DEPTH_INFINITE, null );
+				}
+				catch( final CoreException e ) {
+				}
+			}
+		}
+	}
+
+	/**
+	 * @see org.eclipse.core.runtime.IExecutableExtension#setInitializationData(org.eclipse.core.runtime.IConfigurationElement,
+	 *      java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void setInitializationData( IConfigurationElement config, String propertyName, Object data )
+	throws CoreException
+	{
+		super.setInitializationData( config, propertyName, data );
+
+		DebugPlugin.getDefault().addDebugEventListener( this );
+	}
+
+	/**
+	 * @param string
+	 * @param project
+	 * @return
+	 */
+	private IRuntimeClasspathEntry findJar( VARS variable )
+	{
+		final IRuntimeClasspathEntry vcpe = JavaRuntime.newVariableRuntimeClasspathEntry( variable.path );
+
+		vcpe.setClasspathProperty( IRuntimeClasspathEntry.VARIABLE );
+
+		return vcpe;
+	}
+
+	/**
 	 * @param resource
 	 * @param string
 	 * @param line
@@ -239,18 +306,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		return null;
 	}
 
-	void buildResource( IProgressMonitor progressMonitor, IResource resource )
-	{
-		this.L.debug( "BUILDING %s", resource.getFullPath() ); //$NON-NLS-1$
-
-		try {
-			createJavaSource( progressMonitor, resource );
-		}
-		catch( final Exception e ) {
-			addError( resource, e.getLocalizedMessage(), 0 );
-		}
-	}
-
 	/**
 	 * @see org.eclipse.core.internal.events.InternalBuilder#clean(org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -267,26 +322,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	 */
 	protected abstract void cleanJavaSource( IProgressMonitor progressMonitor, IResource resource ) throws IOException;
 
-	void cleanResource( IProgressMonitor progressMonitor, IResource resource )
-	{
-		this.L.debug( "CLEANING %s", resource.getFullPath() ); //$NON-NLS-1$
-
-		try {
-			resource.deleteMarkers( markerType(), true, IResource.DEPTH_INFINITE );
-		}
-		catch( final CoreException e ) {
-		}
-
-		try {
-			cleanJavaSource( progressMonitor, resource );
-		}
-		catch( final Exception e ) {
-			addError( resource, e.getLocalizedMessage(), 0 );
-		}
-	}
-
-	abstract void collectErrors( IResource resource, char[] output ) throws IOException;
-
 	/**
 	 * @param progressMonitor
 	 *            TODO
@@ -297,20 +332,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	 */
 	protected abstract void createJavaSource( IProgressMonitor progressMonitor, IResource resource )
 	throws IOException, CoreException;
-
-	/**
-	 * @param string
-	 * @param project
-	 * @return
-	 */
-	private IRuntimeClasspathEntry findJar( VARS variable )
-	{
-		final IRuntimeClasspathEntry vcpe = JavaRuntime.newVariableRuntimeClasspathEntry( variable.path );
-
-		vcpe.setClasspathProperty( IRuntimeClasspathEntry.VARIABLE );
-
-		return vcpe;
-	}
 
 	/**
 	 * Peek into .cup/.lex file to get the package and class name
@@ -349,52 +370,58 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	}
 
 	/**
+	 * @return
+	 */
+	protected String markerType()
+	{
+		return ClePlugin.ID + "." + getClass().getSimpleName(); //$NON-NLS-1$
+	}
+
+	/**
+	 * @param resource
+	 * @return
+	 */
+	protected abstract boolean resourceMatches( IResource resource );
+
+	void buildResource( IProgressMonitor progressMonitor, IResource resource )
+	{
+		this.L.debug( "BUILDING %s", resource.getFullPath() ); //$NON-NLS-1$
+
+		try {
+			createJavaSource( progressMonitor, resource );
+		}
+		catch( final Exception e ) {
+			addError( resource, e.getLocalizedMessage(), 0 );
+		}
+	}
+
+	void cleanResource( IProgressMonitor progressMonitor, IResource resource )
+	{
+		this.L.debug( "CLEANING %s", resource.getFullPath() ); //$NON-NLS-1$
+
+		try {
+			resource.deleteMarkers( markerType(), true, IResource.DEPTH_INFINITE );
+		}
+		catch( final CoreException e ) {
+		}
+
+		try {
+			cleanJavaSource( progressMonitor, resource );
+		}
+		catch( final Exception e ) {
+			addError( resource, e.getLocalizedMessage(), 0 );
+		}
+	}
+
+	abstract void collectErrors( IResource resource, char[] output ) throws IOException;
+
+	/**
 	 * @param monitor
 	 * @throws CoreException
 	 */
 	void fullBuild( IProgressMonitor progressMonitor ) throws CoreException
 	{
 		getProject().accept( new FullBuildVisitor( progressMonitor ) );
-	}
-
-	/**
-	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
-	 */
-	public void handleDebugEvents( DebugEvent[] events )
-	{
-		for( int k = 0; k < events.length; k++ ) {
-			if( events[k].getKind() != DebugEvent.TERMINATE ) {
-				continue;
-			}
-
-			if( !(events[k].getSource() instanceof IProcess) ) {
-				continue;
-			}
-
-			final IProcess p = (IProcess) events[k].getSource();
-			final String n = p.getLaunch().getLaunchConfiguration().getName();
-			final ProcessData d = (ProcessData) this.processData.get( n );
-
-			if( d == null ) {
-				continue;
-			}
-
-			try {
-				collectErrors( d.preferences.findResource(), d.out.toCharArray() );
-			}
-			catch( final IOException e ) {
-				addError( d.preferences.findResource(), e.getLocalizedMessage(), 0 );
-			}
-			finally {
-				this.processData.remove( n );
-
-				try {
-					d.preferences.getEclipseProject().refreshLocal( IResource.DEPTH_INFINITE, null );
-				}
-				catch( final CoreException e ) {
-				}
-			}
-		}
 	}
 
 	/**
@@ -461,33 +488,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		finally {
 			lwc.delete();
 		}
-	}
-
-	/**
-	 * @return
-	 */
-	protected String markerType()
-	{
-		return ClePlugin.ID + "." + getClass().getSimpleName(); //$NON-NLS-1$
-	}
-
-	/**
-	 * @param resource
-	 * @return
-	 */
-	protected abstract boolean resourceMatches( IResource resource );
-
-	/**
-	 * @see org.eclipse.core.runtime.IExecutableExtension#setInitializationData(org.eclipse.core.runtime.IConfigurationElement,
-	 *      java.lang.String, java.lang.Object)
-	 */
-	@Override
-	public void setInitializationData( IConfigurationElement config, String propertyName, Object data )
-	throws CoreException
-	{
-		super.setInitializationData( config, propertyName, data );
-
-		DebugPlugin.getDefault().addDebugEventListener( this );
 	}
 
 	/**

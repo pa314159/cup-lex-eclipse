@@ -45,7 +45,7 @@ class MarkerTool
 			marker.setAttribute( IMarker.MESSAGE, string.toString() );
 			marker.setAttribute( IMarker.SEVERITY, severity );
 
-			if( values != null && values.length > 0 ) {
+			if( (values != null) && (values.length > 0) ) {
 				value = values[0];
 			}
 

@@ -128,7 +128,7 @@ extends AbstractUIPlugin
 	 */
 	public static boolean isLogEnabled()
 	{
-		return PLUGIN == null || PLUGIN != null && PLUGIN.LOG4J;
+		return (PLUGIN == null) || ((PLUGIN != null) && PLUGIN.LOG4J);
 	}
 
 	/**
@@ -173,7 +173,7 @@ extends AbstractUIPlugin
 						try {
 							return ((IPackageFragmentRoot) element).getKind() == IPackageFragmentRoot.K_SOURCE;
 						}
-						catch( JavaModelException e ) {
+						catch( final JavaModelException e ) {
 						}
 					}
 
@@ -208,7 +208,7 @@ extends AbstractUIPlugin
 		IJavaElement[] packages = null;
 
 		try {
-			if( element != null && element.exists() ) {
+			if( (element != null) && element.exists() ) {
 				packages = element.getChildren();
 			}
 		}
@@ -252,7 +252,7 @@ extends AbstractUIPlugin
 		boolean uppercase = upperFirst;
 		boolean lowercase = !uppercase;
 
-		if( size > 1 && lowercase ) {
+		if( (size > 1) && lowercase ) {
 			if( Character.isUpperCase( ncChars[0] ) && Character.isUpperCase( ncChars[1] ) ) {
 				lowercase = false;
 			}
@@ -327,7 +327,7 @@ extends AbstractUIPlugin
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		final IPathVariableManager pathMan = workspace.getPathVariableManager();
 
-		final String[] a = pathMan.getPathVariableNames();
+		pathMan.getPathVariableNames();
 	}
 
 	/**

@@ -83,6 +83,112 @@ extends AbstractWidget
 	}
 
 	/**
+	 * @return Returns the preferences.
+	 */
+	public CupPrefs getPreferences()
+	{
+		return this.preferences;
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean isOutputVisible()
+	{
+		return this.txJavaFolder.isVisible();
+	}
+
+	/**
+	 * 
+	 */
+	public void performApply()
+	{
+		if( this.preferences != null ) {
+			this.preferences.setJavaFolder( this.txJavaFolder.getText() );
+			this.preferences.setParserClass( this.txCupClass.getText() );
+			this.preferences.setSymbolsClass( this.txSymClass.getText() );
+			this.preferences.setExpectedConflicts( this.ctExpected.getSelection() );
+			this.preferences.setSymbolsIf( this.ckSymIf.getSelection() );
+			this.preferences.setDebug( this.ckDebug.getSelection() );
+			this.preferences.setNonTerms( this.ckNonTerms.getSelection() );
+			this.preferences.setCompactRed( this.ckCompactRed.getSelection() );
+			this.preferences.setNoPositions( this.ckNoPositions.getSelection() );
+			this.preferences.setNoScanner( this.ckNoScanner.getSelection() );
+
+			this.preferences.flush();
+		}
+	}
+
+	/**
+	 * @param visible
+	 */
+	public void setOutputVisible( boolean visible )
+	{
+		this.lxJavaFolder.setVisible( visible );
+		this.txJavaFolder.setVisible( visible );
+		this.btJavaFolder.setVisible( visible );
+
+		layout( true, true );
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setParserClass( String string )
+	{
+		this.txCupClass.setText( string );
+	}
+
+	/**
+	 * @param preferences
+	 *            The preferences to set.
+	 */
+	public void setPreferences( CupPrefs preferences )
+	{
+		this.preferences = preferences;
+
+		this.btJavaFolder.setEnabled( this.preferences != null );
+
+		fillValues();
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setSymClass( String string )
+	{
+		this.txSymClass.setText( string );
+	}
+
+	/**
+	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
+	 */
+	@Override
+	public void updateWidgetContainer()
+	{
+		if( isOutputVisible()
+			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
+			fireWidgetModified( CleStrings.get( "preference-cup-output-error" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( this.txCupClass.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "preference-cup-parser-error" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( this.txSymClass.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "preference-cup-symbol-error" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		fireWidgetModified( null );
+	}
+
+	/**
 	 * 
 	 */
 	protected void fillValues()
@@ -101,14 +207,6 @@ extends AbstractWidget
 			this.ckNoPositions.setSelection( this.preferences.getNoPositions() );
 			this.ckNoScanner.setSelection( this.preferences.getNoScanner() );
 		}
-	}
-
-	/**
-	 * @return Returns the preferences.
-	 */
-	public CupPrefs getPreferences()
-	{
-		return this.preferences;
 	}
 
 	protected void initialize()
@@ -286,31 +384,17 @@ extends AbstractWidget
 	}
 
 	/**
-	 * @return
+	 * @param e
 	 */
-	public boolean isOutputVisible()
+	protected void selectJavaFolder( SelectionEvent e )
 	{
-		return this.txJavaFolder.isVisible();
-	}
+		final IContainer selected = ClePlugin.selectJavaFolder( getShell(), this.preferences.getEclipseProject() );
 
-	/**
-	 * 
-	 */
-	public void performApply()
-	{
-		if( this.preferences != null ) {
-			this.preferences.setJavaFolder( this.txJavaFolder.getText() );
-			this.preferences.setParserClass( this.txCupClass.getText() );
-			this.preferences.setSymbolsClass( this.txSymClass.getText() );
-			this.preferences.setExpectedConflicts( this.ctExpected.getSelection() );
-			this.preferences.setSymbolsIf( this.ckSymIf.getSelection() );
-			this.preferences.setDebug( this.ckDebug.getSelection() );
-			this.preferences.setNonTerms( this.ckNonTerms.getSelection() );
-			this.preferences.setCompactRed( this.ckCompactRed.getSelection() );
-			this.preferences.setNoPositions( this.ckNoPositions.getSelection() );
-			this.preferences.setNoScanner( this.ckNoScanner.getSelection() );
-
-			this.preferences.flush();
+		if( selected != null ) {
+			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
+		}
+		else {
+			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
 		}
 	}
 
@@ -334,90 +418,6 @@ extends AbstractWidget
 		else {
 			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
 		}
-	}
-
-	/**
-	 * @param e
-	 */
-	protected void selectJavaFolder( SelectionEvent e )
-	{
-		final IContainer selected = ClePlugin.selectJavaFolder( getShell(), this.preferences.getEclipseProject() );
-
-		if( selected != null ) {
-			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
-		}
-		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
-		}
-	}
-
-	/**
-	 * @param visible
-	 */
-	public void setOutputVisible( boolean visible )
-	{
-		this.lxJavaFolder.setVisible( visible );
-		this.txJavaFolder.setVisible( visible );
-		this.btJavaFolder.setVisible( visible );
-
-		layout( true, true );
-	}
-
-	/**
-	 * @param string
-	 */
-	public void setParserClass( String string )
-	{
-		this.txCupClass.setText( string );
-	}
-
-	/**
-	 * @param preferences
-	 *            The preferences to set.
-	 */
-	public void setPreferences( CupPrefs preferences )
-	{
-		this.preferences = preferences;
-
-		this.btJavaFolder.setEnabled( this.preferences != null );
-
-		fillValues();
-	}
-
-	/**
-	 * @param string
-	 */
-	public void setSymClass( String string )
-	{
-		this.txSymClass.setText( string );
-	}
-
-	/**
-	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
-	 */
-	@Override
-	public void updateWidgetContainer()
-	{
-		if( isOutputVisible()
-			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-output-error" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( this.txCupClass.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-parser-error" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( this.txSymClass.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-symbol-error" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		fireWidgetModified( null );
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"

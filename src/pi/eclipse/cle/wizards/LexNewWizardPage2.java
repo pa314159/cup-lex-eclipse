@@ -26,20 +26,6 @@ extends AbstractWizardPage
 	}
 
 	/**
-	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(org.eclipse.core.resources.IContainer,
-	 *      org.eclipse.swt.widgets.Composite)
-	 */
-	@Override
-	protected Composite createWidget( IContainer container, Composite parent )
-	{
-		final LexPrefsWidget widget = new LexPrefsWidget( parent );
-
-		widget.setOutputVisible( false );
-
-		return widget;
-	}
-
-	/**
 	 * @see org.eclipse.jface.dialogs.IDialogPage#getControl()
 	 */
 	@Override
@@ -75,6 +61,20 @@ extends AbstractWizardPage
 				getControl().setPreferences( new LexPrefs( folder.getProject(), resource ) );
 			}
 		}
+	}
+
+	/**
+	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(org.eclipse.core.resources.IContainer,
+	 *      org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Composite createWidget( IContainer container, Composite parent )
+	{
+		final LexPrefsWidget widget = new LexPrefsWidget( parent );
+
+		widget.setOutputVisible( false );
+
+		return widget;
 	}
 
 	@Override

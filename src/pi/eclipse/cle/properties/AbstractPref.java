@@ -76,17 +76,6 @@ public abstract class AbstractPref
 	}
 
 	/**
-	 * @param k
-	 * @param d
-	 *            TODO
-	 * @return
-	 */
-	protected boolean getBooleanPref( ClePreferences e )
-	{
-		return this.preferences.getBoolean( this.resource + "/" + e.toString(), e.getDefaultBoolean() ); //$NON-NLS-1$
-	}
-
-	/**
 	 * @return
 	 */
 	public String getDefaultJavaFolder()
@@ -112,15 +101,6 @@ public abstract class AbstractPref
 	public IProject getEclipseProject()
 	{
 		return this.eproject;
-	}
-
-	/**
-	 * @param k
-	 * @return
-	 */
-	protected int getIntPref( ClePreferences e )
-	{
-		return this.preferences.getInt( this.resource + "/" + e, e.getDefaultInt() ); //$NON-NLS-1$
 	}
 
 	/**
@@ -155,6 +135,31 @@ public abstract class AbstractPref
 	}
 
 	/**
+	 * @param v
+	 */
+	public abstract void setJavaFolder( String v );
+
+	/**
+	 * @param k
+	 * @param d
+	 *            TODO
+	 * @return
+	 */
+	protected boolean getBooleanPref( ClePreferences e )
+	{
+		return this.preferences.getBoolean( this.resource + "/" + e.toString(), e.getDefaultBoolean() ); //$NON-NLS-1$
+	}
+
+	/**
+	 * @param k
+	 * @return
+	 */
+	protected int getIntPref( ClePreferences e )
+	{
+		return this.preferences.getInt( this.resource + "/" + e, e.getDefaultInt() ); //$NON-NLS-1$
+	}
+
+	/**
 	 * @param k
 	 * @param v
 	 * @return
@@ -173,11 +178,6 @@ public abstract class AbstractPref
 	{
 		return this.preferences.get( this.resource + "/" + e, v ); //$NON-NLS-1$
 	}
-
-	/**
-	 * @param v
-	 */
-	public abstract void setJavaFolder( String v );
 
 	/**
 	 * @param string

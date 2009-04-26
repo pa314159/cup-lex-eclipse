@@ -18,10 +18,11 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import JFlex.Options;
+
 import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.AbstractWidget;
-import JFlex.Options;
 
 /**
  * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
@@ -61,6 +62,87 @@ extends AbstractWidget
 		super( parent, SWT.NONE );
 
 		initialize();
+	}
+
+	/**
+	 * @return Returns the preferences.
+	 */
+	public LexPrefs getPreferences()
+	{
+		return this.preferences;
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean isOutputVisible()
+	{
+		return this.txJavaFolder.isVisible();
+	}
+
+	/**
+	 * 
+	 */
+	public void performApply()
+	{
+		if( this.preferences != null ) {
+			this.preferences.setJavaFolder( this.txJavaFolder.getText() );
+
+			this.preferences.setSkipMin( this.ckSkipMin.getSelection() );
+			this.preferences.setComply( this.ckComply.getSelection() );
+
+			this.preferences.setCodeMethod( Options.PACK );
+
+			if( this.brTable.getSelection() ) {
+				this.preferences.setCodeMethod( Options.TABLE );
+			}
+			if( this.brSwitch.getSelection() ) {
+				this.preferences.setCodeMethod( Options.SWITCH );
+			}
+
+			this.preferences.flush();
+		}
+	}
+
+	/**
+	 * @param visible
+	 */
+	public void setOutputVisible( boolean visible )
+	{
+		this.lxJavaFolder.setVisible( visible );
+		this.txJavaFolder.setVisible( visible );
+		this.btJavaFolder.setVisible( visible );
+
+		layout( true, true );
+	}
+
+	/**
+	 * @param preferences
+	 *            The preferences to set.
+	 */
+	public void setPreferences( LexPrefs preferences )
+	{
+		this.preferences = preferences;
+
+		this.btJavaFolder.setEnabled( this.preferences != null );
+
+		fillValues();
+	}
+
+	/**
+	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
+	 */
+	@Override
+	public void updateWidgetContainer()
+	{
+		if( isOutputVisible()
+			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		fireWidgetModified( null );
 	}
 
 	/**
@@ -164,14 +246,6 @@ extends AbstractWidget
 		}
 	}
 
-	/**
-	 * @return Returns the preferences.
-	 */
-	public LexPrefs getPreferences()
-	{
-		return this.preferences;
-	}
-
 	protected void initialize()
 	{
 		final GridLayout gridLayout = new GridLayout();
@@ -216,34 +290,17 @@ extends AbstractWidget
 	}
 
 	/**
-	 * @return
+	 * @param e
 	 */
-	public boolean isOutputVisible()
+	protected void selectJavaFolder( SelectionEvent e )
 	{
-		return this.txJavaFolder.isVisible();
-	}
+		final IContainer selected = ClePlugin.selectJavaFolder( getShell(), this.preferences.getEclipseProject() );
 
-	/**
-	 * 
-	 */
-	public void performApply()
-	{
-		if( this.preferences != null ) {
-			this.preferences.setJavaFolder( this.txJavaFolder.getText() );
-
-			this.preferences.setSkipMin( this.ckSkipMin.getSelection() );
-			this.preferences.setComply( this.ckComply.getSelection() );
-
-			this.preferences.setCodeMethod( Options.PACK );
-
-			if( this.brTable.getSelection() ) {
-				this.preferences.setCodeMethod( Options.TABLE );
-			}
-			if( this.brSwitch.getSelection() ) {
-				this.preferences.setCodeMethod( Options.SWITCH );
-			}
-
-			this.preferences.flush();
+		if( selected != null ) {
+			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
+		}
+		else {
+			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
 		}
 	}
 
@@ -280,61 +337,5 @@ extends AbstractWidget
 		else {
 			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
 		}
-	}
-
-	/**
-	 * @param e
-	 */
-	protected void selectJavaFolder( SelectionEvent e )
-	{
-		final IContainer selected = ClePlugin.selectJavaFolder( getShell(), this.preferences.getEclipseProject() );
-
-		if( selected != null ) {
-			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
-		}
-		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
-		}
-	}
-
-	/**
-	 * @param visible
-	 */
-	public void setOutputVisible( boolean visible )
-	{
-		this.lxJavaFolder.setVisible( visible );
-		this.txJavaFolder.setVisible( visible );
-		this.btJavaFolder.setVisible( visible );
-
-		layout( true, true );
-	}
-
-	/**
-	 * @param preferences
-	 *            The preferences to set.
-	 */
-	public void setPreferences( LexPrefs preferences )
-	{
-		this.preferences = preferences;
-
-		this.btJavaFolder.setEnabled( this.preferences != null );
-
-		fillValues();
-	}
-
-	/**
-	 * @see pi.eclipse.cle.util.AbstractWidget#updateWidgetContainer()
-	 */
-	@Override
-	public void updateWidgetContainer()
-	{
-		if( isOutputVisible()
-			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		fireWidgetModified( null );
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"

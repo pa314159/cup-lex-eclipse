@@ -16,6 +16,15 @@ extends AbstractWizardPage
 	}
 
 	/**
+	 * @see org.eclipse.jface.dialogs.IDialogPage#getControl()
+	 */
+	@Override
+	public LexNewWizardWidget1 getControl()
+	{
+		return (LexNewWizardWidget1) super.getControl();
+	}
+
+	/**
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
@@ -23,15 +32,6 @@ extends AbstractWizardPage
 	{
 		return new LexNewWizardWidget1( parent, container );
 
-	}
-
-	/**
-	 * @see org.eclipse.jface.dialogs.IDialogPage#getControl()
-	 */
-	@Override
-	public LexNewWizardWidget1 getControl()
-	{
-		return (LexNewWizardWidget1) super.getControl();
 	}
 
 }

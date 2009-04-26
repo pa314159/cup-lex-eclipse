@@ -37,6 +37,13 @@ implements IWorkbenchPreferencePage
 	}
 
 	/**
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 */
+	public void init( IWorkbench workbench )
+	{
+	}
+
+	/**
 	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
 	 */
 	@Override
@@ -59,12 +66,5 @@ implements IWorkbenchPreferencePage
 		addField( new RadioGroupFieldEditor( LEX_CODE_METHOD.toString(), LEX_CODE_METHOD.toLabel(), 1, val, fep ) );
 		addField( new BooleanFieldEditor( LEX_DUMP.toString(), LEX_DUMP.toLabel(), fep ) );
 		addField( new BooleanFieldEditor( LEX_QUIET.toString(), LEX_QUIET.toLabel(), fep ) );
-	}
-
-	/**
-	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
-	 */
-	public void init( IWorkbench workbench )
-	{
 	}
 }

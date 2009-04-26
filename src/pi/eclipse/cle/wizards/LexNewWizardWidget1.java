@@ -136,20 +136,55 @@ extends AbstractWidget
 		}
 	}
 
-	/**
-	 * @return
-	 */
-	String getFileName()
+	@Override
+	public void updateWidgetContainer()
 	{
-		return this.txFileName.getText().replaceAll( "\\.lex$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
-	}
+		if( this.txFolder.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
 
-	/**
-	 * @return
-	 */
-	IContainer getFolder()
-	{
-		return this.resFolder;
+			return;
+		}
+
+		final String fileName = this.txFileName.getText();
+
+		if( fileName.length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".lex" ) ) { //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "lex-ext-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		final IContainer folder = getFolder();
+		final IResource resource = folder != null ? folder.findMember( getFileName() + ".lex" ) : null; //$NON-NLS-1$
+
+		if( (resource != null) && resource.exists() ) {
+			fireWidgetModified( CleStrings.get( "resource-already-exists", getFileName() ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		if( this.txJavaName.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "class-name-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+		if( this.txJavaFolder.getText().length() == 0 ) {
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+		if( this.ckCup.getSelection() && (this.txSym.getText().length() == 0) ) {
+			fireWidgetModified( CleStrings.get( "symbols-class-required" ) ); //$NON-NLS-1$
+
+			return;
+		}
+
+		fireWidgetModified( null );
 	}
 
 	protected void initialize()
@@ -532,54 +567,19 @@ extends AbstractWidget
 		this.txSym.setText( javaName + "Sym" ); //$NON-NLS-1$
 	}
 
-	@Override
-	public void updateWidgetContainer()
+	/**
+	 * @return
+	 */
+	String getFileName()
 	{
-		if( this.txFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
+		return this.txFileName.getText().replaceAll( "\\.lex$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 
-			return;
-		}
-
-		final String fileName = this.txFileName.getText();
-
-		if( fileName.length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( fileName.lastIndexOf( '.' ) >= 0 && !fileName.endsWith( ".lex" ) ) { //$NON-NLS-1$
-			fireWidgetModified( CleStrings.get( "lex-ext-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		final IContainer folder = getFolder();
-		final IResource resource = folder != null ? folder.findMember( getFileName() + ".lex" ) : null; //$NON-NLS-1$
-
-		if( resource != null && resource.exists() ) {
-			fireWidgetModified( CleStrings.get( "resource-already-exists", getFileName() ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		if( this.txJavaName.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "class-name-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-		if( this.txJavaFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-		if( this.ckCup.getSelection() && this.txSym.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "symbols-class-required" ) ); //$NON-NLS-1$
-
-			return;
-		}
-
-		fireWidgetModified( null );
+	/**
+	 * @return
+	 */
+	IContainer getFolder()
+	{
+		return this.resFolder;
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"

@@ -24,6 +24,26 @@ implements WidgetListener
 	private CupPrefsWidget	widget;
 
 	/**
+	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
+	 */
+	@Override
+	public boolean performOk()
+	{
+		performApply();
+
+		return super.performOk();
+	}
+
+	/**
+	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
+	 */
+	public void updateContainer( String status )
+	{
+		setErrorMessage( status );
+		setValid( status == null );
+	}
+
+	/**
 	 * @see PreferencePage#createContents(Composite)
 	 */
 	@Override
@@ -90,25 +110,5 @@ implements WidgetListener
 		if( this.widget != null ) {
 			this.widget.performDefaults();
 		}
-	}
-
-	/**
-	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
-	 */
-	@Override
-	public boolean performOk()
-	{
-		performApply();
-
-		return super.performOk();
-	}
-
-	/**
-	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
-	 */
-	public void updateContainer( String status )
-	{
-		setErrorMessage( status );
-		setValid( status == null );
 	}
 }

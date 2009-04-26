@@ -27,20 +27,6 @@ extends AbstractWizardPage
 	}
 
 	/**
-	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(org.eclipse.core.resources.IContainer,
-	 *      org.eclipse.swt.widgets.Composite)
-	 */
-	@Override
-	protected Composite createWidget( IContainer container, Composite parent )
-	{
-		final CupPrefsWidget widget = new CupPrefsWidget( parent );
-
-		widget.setOutputVisible( false );
-
-		return widget;
-	}
-
-	/**
 	 * @see org.eclipse.jface.dialogs.IDialogPage#getControl()
 	 */
 	@Override
@@ -81,6 +67,20 @@ extends AbstractWizardPage
 				getControl().setSymClass( javaName + "Sym" ); //$NON-NLS-1$
 			}
 		}
+	}
+
+	/**
+	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(org.eclipse.core.resources.IContainer,
+	 *      org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Composite createWidget( IContainer container, Composite parent )
+	{
+		final CupPrefsWidget widget = new CupPrefsWidget( parent );
+
+		widget.setOutputVisible( false );
+
+		return widget;
 	}
 
 	@Override

@@ -62,49 +62,6 @@ extends AbstractBuilder
 	}
 
 	/**
-	 * @param chars
-	 * @throws CoreException
-	 * @throws IOException
-	 */
-	@Override
-	void collectErrors( IResource resource, char[] chars )
-	{
-		// BufferedReader br = new BufferedReader();
-		// String ln = null;
-		//
-		// while( (ln = br.readLine()) != null ) {
-		// // System.out.println(ln);
-		//
-		// L.trace("CUP: %s", ln); //$NON-NLS-1$
-		//
-		// try {
-		// if( ln.startsWith("Error ") ) { //$NON-NLS-1$
-		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
-		// }
-		// if( ln.startsWith("Fatal ") ) { //$NON-NLS-1$
-		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
-		// }
-		// if( ln.startsWith("Warning ") ) { //$NON-NLS-1$
-		// addCupWarning(resource, ln.substring(8)); //$NON-NLS-1$
-		// }
-		// }
-		// catch( Throwable t ) {
-		// addError(resource, t.getLocalizedMessage(), 0);
-		// }
-		// }
-		final MarkerTool t = new MarkerTool( resource, markerType() );
-		final CupOutLex s = new CupOutLex( new CharArrayReader( chars ) );
-		final CupOutCup p = new CupOutCup( s, t );
-
-		try {
-			p.parse();
-		}
-		catch( final Exception e ) {
-			t.addError( e.getLocalizedMessage() );
-		}
-	}
-
-	/**
 	 * @param progressMonitor
 	 * @throws CoreException
 	 * @see pi.eclipse.cle.builders.AbstractBuilder#createJavaSource(IProgressMonitor,
@@ -186,5 +143,48 @@ extends AbstractBuilder
 	protected boolean resourceMatches( IResource resource )
 	{
 		return "cup".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
+	}
+
+	/**
+	 * @param chars
+	 * @throws CoreException
+	 * @throws IOException
+	 */
+	@Override
+	void collectErrors( IResource resource, char[] chars )
+	{
+		// BufferedReader br = new BufferedReader();
+		// String ln = null;
+		//
+		// while( (ln = br.readLine()) != null ) {
+		// // System.out.println(ln);
+		//
+		// L.trace("CUP: %s", ln); //$NON-NLS-1$
+		//
+		// try {
+		// if( ln.startsWith("Error ") ) { //$NON-NLS-1$
+		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
+		// }
+		// if( ln.startsWith("Fatal ") ) { //$NON-NLS-1$
+		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
+		// }
+		// if( ln.startsWith("Warning ") ) { //$NON-NLS-1$
+		// addCupWarning(resource, ln.substring(8)); //$NON-NLS-1$
+		// }
+		// }
+		// catch( Throwable t ) {
+		// addError(resource, t.getLocalizedMessage(), 0);
+		// }
+		// }
+		final MarkerTool t = new MarkerTool( resource, markerType() );
+		final CupOutLex s = new CupOutLex( new CharArrayReader( chars ) );
+		final CupOutCup p = new CupOutCup( s, t );
+
+		try {
+			p.parse();
+		}
+		catch( final Exception e ) {
+			t.addError( e.getLocalizedMessage() );
+		}
 	}
 }

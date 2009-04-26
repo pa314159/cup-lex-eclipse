@@ -233,7 +233,7 @@ extends ContentOutlinePage
 
 		if( viewer != null ) {
 			final Control control = viewer.getControl();
-			if( control != null && !control.isDisposed() ) {
+			if( (control != null) && !control.isDisposed() ) {
 				control.setRedraw( false );
 				viewer.setInput( this.input );
 				viewer.expandAll();

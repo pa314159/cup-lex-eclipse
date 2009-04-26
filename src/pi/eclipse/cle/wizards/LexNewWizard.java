@@ -3,8 +3,6 @@ package pi.eclipse.cle.wizards;
 import org.apache.velocity.VelocityContext;
 import org.eclipse.core.resources.IContainer;
 
-import pi.eclipse.cle.properties.AbstractPref;
-
 /**
  * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */

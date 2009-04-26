@@ -12,10 +12,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import pi.eclipse.cle.ClePlugin;
-import pi.eclipse.cle.properties.LexPrefs;
 import JFlex.Main;
 import JFlex.Options;
+
+import pi.eclipse.cle.ClePlugin;
+import pi.eclipse.cle.properties.LexPrefs;
 
 /**
  * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
@@ -71,25 +72,6 @@ extends AbstractBuilder
 		}
 
 		fDest.delete();
-	}
-
-	/**
-	 * @param bs
-	 * @throws IOException
-	 */
-	@Override
-	void collectErrors( IResource resource, char[] chars ) throws IOException
-	{
-		final MarkerTool t = new MarkerTool( resource, markerType() );
-		final LexOutLex s = new LexOutLex( new CharArrayReader( chars ) );
-		final LexOutCup p = new LexOutCup( s, t );
-
-		try {
-			p.parse();
-		}
-		catch( final Exception e ) {
-			t.addError( e.getLocalizedMessage() );
-		}
 	}
 
 	/**
@@ -154,5 +136,24 @@ extends AbstractBuilder
 	protected boolean resourceMatches( IResource resource )
 	{
 		return "lex".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
+	}
+
+	/**
+	 * @param bs
+	 * @throws IOException
+	 */
+	@Override
+	void collectErrors( IResource resource, char[] chars ) throws IOException
+	{
+		final MarkerTool t = new MarkerTool( resource, markerType() );
+		final LexOutLex s = new LexOutLex( new CharArrayReader( chars ) );
+		final LexOutCup p = new LexOutCup( s, t );
+
+		try {
+			p.parse();
+		}
+		catch( final Exception e ) {
+			t.addError( e.getLocalizedMessage() );
+		}
 	}
 }

@@ -18,21 +18,21 @@ extends AbstractWizardPage
 	}
 
 	/**
-	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(IContainer, org.eclipse.swt.widgets.Composite)
-	 */
-	@Override
-	protected Composite createWidget( IContainer container, Composite parent )
-	{
-		return new CupNewWizardWidget1( parent, container );
-	}
-
-	/**
 	 * @see org.eclipse.jface.dialogs.IDialogPage#getControl()
 	 */
 	@Override
 	public CupNewWizardWidget1 getControl()
 	{
 		return (CupNewWizardWidget1) super.getControl();
+	}
+
+	/**
+	 * @see pi.eclipse.cle.wizards.AbstractWizardPage#createWidget(IContainer, org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	protected Composite createWidget( IContainer container, Composite parent )
+	{
+		return new CupNewWizardWidget1( parent, container );
 	}
 
 }

@@ -4,8 +4,6 @@ import org.apache.velocity.VelocityContext;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.ui.INewWizard;
 
-import pi.eclipse.cle.properties.AbstractPref;
-
 /**
  * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
@@ -29,6 +27,15 @@ implements INewWizard
 
 		addPage( this.page1 );
 		addPage( this.page2 );
+	}
+
+	/**
+	 * @return
+	 */
+	@Override
+	public String getFileName()
+	{
+		return this.page1.getControl().getFileName();
 	}
 
 	/**
@@ -58,15 +65,6 @@ implements INewWizard
 	String getFileExtension()
 	{
 		return "cup"; //$NON-NLS-1$
-	}
-
-	/**
-	 * @return
-	 */
-	@Override
-	public String getFileName()
-	{
-		return this.page1.getControl().getFileName();
 	}
 
 }

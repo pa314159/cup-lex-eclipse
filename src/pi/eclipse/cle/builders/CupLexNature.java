@@ -120,6 +120,16 @@ implements IProjectNature
 		return this.project;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.core.resources.IProjectNature#setProject(org.eclipse.core.resources.IProject)
+	 */
+	public void setProject( IProject project )
+	{
+		this.project = project;
+	}
+
 	/**
 	 * @param cupIx
 	 * @throws CoreException
@@ -134,16 +144,6 @@ implements IProjectNature
 		System.arraycopy( commands, index + 1, newCommands, index, commands.length - 1 - index );
 
 		description.setBuildSpec( newCommands );
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.resources.IProjectNature#setProject(org.eclipse.core.resources.IProject)
-	 */
-	public void setProject( IProject project )
-	{
-		this.project = project;
 	}
 
 }

@@ -24,6 +24,26 @@ implements WidgetListener
 	private LexPrefsWidget	widget;
 
 	/**
+	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
+	 */
+	@Override
+	public boolean performOk()
+	{
+		performApply();
+
+		return super.performOk();
+	}
+
+	/**
+	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
+	 */
+	public void updateContainer( String status )
+	{
+		setErrorMessage( status );
+		setValid( status == null );
+	}
+
+	/**
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
@@ -90,26 +110,6 @@ implements WidgetListener
 		if( this.widget != null ) {
 			this.widget.performDefaults();
 		}
-	}
-
-	/**
-	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
-	 */
-	@Override
-	public boolean performOk()
-	{
-		performApply();
-
-		return super.performOk();
-	}
-
-	/**
-	 * @see pi.eclipse.cle.util.WidgetListener#updateContainer(java.lang.String)
-	 */
-	public void updateContainer( String status )
-	{
-		setErrorMessage( status );
-		setValid( status == null );
 	}
 
 }
