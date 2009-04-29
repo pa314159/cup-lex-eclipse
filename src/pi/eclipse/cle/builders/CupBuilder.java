@@ -178,7 +178,7 @@ extends AbstractBuilder
 		// }
 		final MarkerTool t = new MarkerTool( resource, markerType() );
 		final CupOutLex s = new CupOutLex( new CharArrayReader( chars ) );
-		final CupOutCup p = new CupOutCup( s, t );
+		final CupOut p = new CupOut( s, t );
 
 		try {
 			p.parse();

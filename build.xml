@@ -59,8 +59,8 @@
 		<mkdir dir="${output.gen}"/>
 		<lex destdir="${output.gen}" nobak="true" file="etc/cup-out.lex"/>
 		<lex destdir="${output.gen}" nobak="true" file="etc/lex-out.lex"/>
-		<cup destdir="${output.gen}" interface="true" symbols="CupOutSym" parser="CupOutCup" srcfile="etc/cup-out.cup"/>
-		<cup destdir="${output.gen}" interface="true" symbols="LexOutSym" parser="LexOutCup" srcfile="etc/lex-out.cup"/>
+		<cup destdir="${output.gen}" interface="true" symbols="CupOutSym" parser="CupOut" srcfile="etc/cup-out.cup"/>
+		<cup destdir="${output.gen}" interface="true" symbols="LexOutSym" parser="LexOut" srcfile="etc/lex-out.cup"/>
 	</target>
 
 	<target name="compile" depends="generate">

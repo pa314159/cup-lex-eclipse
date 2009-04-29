@@ -147,7 +147,7 @@ extends AbstractBuilder
 	{
 		final MarkerTool t = new MarkerTool( resource, markerType() );
 		final LexOutLex s = new LexOutLex( new CharArrayReader( chars ) );
-		final LexOutCup p = new LexOutCup( s, t );
+		final LexOut p = new LexOut( s, t );
 
 		try {
 			p.parse();

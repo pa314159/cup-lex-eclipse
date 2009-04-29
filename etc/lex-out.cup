@@ -9,11 +9,11 @@ import pi.eclipse.cle.CleLog;
 
 parser code
 {:
-	static final CleLog L = new CleLog(LexOutCup.class);
+	static final CleLog L = new CleLog(LexOut.class);
 
 	MarkerTool markerTool = null;
 
-	LexOutCup(java_cup.runtime.Scanner scanner, MarkerTool markerTool)
+	LexOut(java_cup.runtime.Scanner scanner, MarkerTool markerTool)
 	{
 		super(scanner);
 
@@ -23,7 +23,7 @@ parser code
 	static public void main(String[] args) throws Exception
 	{
 		LexOutLex x = new LexOutLex(new FileReader(args[0]));
-		LexOutCup p = new LexOutCup(x);
+		LexOut    p = new LexOut(x);
 
 		p.debug_parse();
 	}
