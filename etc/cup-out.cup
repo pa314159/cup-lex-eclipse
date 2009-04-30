@@ -9,7 +9,7 @@ parser code
 {:
 	MarkerTool markerTool = null;
 
-	CupOut(java_cup.runtime.Scanner scanner, MarkerTool markerTool)
+	CupOutParser(java_cup.runtime.Scanner scanner, MarkerTool markerTool)
 	{
 		super(scanner);
 
@@ -18,8 +18,8 @@ parser code
 
 	static public void main(String[] args) throws Exception
 	{
-		CupOutLex x = new CupOutLex(new FileReader(args[0]));
-		CupOut    p = new CupOut(x);
+		CupOutScanner x = new CupOutScanner(new FileReader(args[0]));
+		CupOutParser  p = new CupOutParser(x);
 
 		p.parse();
 	}

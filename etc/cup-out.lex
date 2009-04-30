@@ -6,11 +6,11 @@ import java_cup.runtime.*;
 import java.io.*;
 
 import pi.eclipse.cle.CleLog;
-import static pi.eclipse.cle.builders.CupOutSym.*;
+import static pi.eclipse.cle.builders.CupOutSymbols.*;
 
 %%
 
-%class CupOutLex
+%class CupOutScanner
 
 %unicode
 %line
@@ -20,12 +20,12 @@ import static pi.eclipse.cle.builders.CupOutSym.*;
 %final
 // %abstract
 
-%cupsym CupOutSym
+%cupsym CupOutSymbols
 %cup
 // %cupdebug
 
 %{
-	static final CleLog L = new CleLog(CupOutLex.class);
+	static final CleLog L = new CleLog(CupOutScanner.class);
 
 	private Symbol sym(int type)
 	{

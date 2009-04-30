@@ -6,11 +6,11 @@ import java_cup.runtime.*;
 import java.io.*;
 
 import pi.eclipse.cle.CleLog;
-import static pi.eclipse.cle.builders.LexOutSym.*;
+import static pi.eclipse.cle.builders.LexOutSymbols.*;
 
 %%
 
-%class LexOutLex
+%class LexOutScanner
 
 %unicode
 %line
@@ -20,12 +20,12 @@ import static pi.eclipse.cle.builders.LexOutSym.*;
 %final
 // %abstract
 
-%cupsym LexOutSym
+%cupsym LexOutSymbols
 %cup
 %cupdebug
 
 %{
-	static final CleLog L = new CleLog(LexOutLex.class);
+	static final CleLog L = new CleLog(LexOutScanner.class);
 
 	private Symbol sym(int type)
 	{

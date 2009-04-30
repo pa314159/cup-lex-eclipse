@@ -1,4 +1,4 @@
-#Wed Apr 29 15:53:12 EEST 2009
+#Thu Apr 30 08:10:46 EEST 2009
 //etc/cup-out.cup/cup-compact-red=false
 //etc/cup-out.cup/cup-debug=false
 //etc/cup-out.cup/cup-expected-conflicts=0
@@ -6,8 +6,8 @@
 //etc/cup-out.cup/cup-no-scanner=false
 //etc/cup-out.cup/cup-non-terms=false
 //etc/cup-out.cup/cup-output=output/generated
-//etc/cup-out.cup/cup-parser-class=CupOut
-//etc/cup-out.cup/cup-symbols-class=CupOutSym
+//etc/cup-out.cup/cup-parser-class=CupOutParser
+//etc/cup-out.cup/cup-symbols-class=CupOutSymbols
 //etc/cup-out.cup/cup-symbols-if=true
 //etc/cup-out.lex/lex-code-method=0
 //etc/cup-out.lex/lex-comply-jlex=false
@@ -20,8 +20,8 @@
 //etc/lex-out.cup/cup-no-scanner=false
 //etc/lex-out.cup/cup-non-terms=false
 //etc/lex-out.cup/cup-output=output/generated
-//etc/lex-out.cup/cup-parser-class=LexOut
-//etc/lex-out.cup/cup-symbols-class=LexOutSym
+//etc/lex-out.cup/cup-parser-class=LexOutParser
+//etc/lex-out.cup/cup-symbols-class=LexOutSymbols
 //etc/lex-out.cup/cup-symbols-if=true
 //etc/lex-out.lex/lex-code-method=0
 //etc/lex-out.lex/lex-comply-jlex=false

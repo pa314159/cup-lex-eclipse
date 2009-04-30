@@ -146,8 +146,8 @@ extends AbstractBuilder
 	void collectErrors( IResource resource, char[] chars ) throws IOException
 	{
 		final MarkerTool t = new MarkerTool( resource, markerType() );
-		final LexOutLex s = new LexOutLex( new CharArrayReader( chars ) );
-		final LexOut p = new LexOut( s, t );
+		final LexOutScanner s = new LexOutScanner( new CharArrayReader( chars ) );
+		final LexOutParser p = new LexOutParser( s, t );
 
 		try {
 			p.parse();
