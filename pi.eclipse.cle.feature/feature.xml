@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<feature
+      id="pi.eclipse.cle"
+      label="%featureName"
+      version="0.1.2.3-VERSIONSUFFIX"
+      provider-name="%featureProvider"
+      plugin="pi.eclipse.cle">
+
+   <description url="http://cup-lex-eclipse.sourceforge.net/">
+      %featureDescription
+   </description>
+
+   <copyright url="http://cup-lex-eclipse.sourceforge.net/">
+      %featureCopyright
+   </copyright>
+
+   <license url="http://www.gnu.org/licenses/gpl.txt">
+      %featureLicense
+   </license>
+
+   <url>
+      <update label="%featureSite" url="http://cup-lex-eclipse.sourceforge.net/update"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.variables"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+   </requires>
+
+   <plugin
+         id="pi.eclipse.cle"
+         download-size="0"
+         install-size="0"
+         version="0.1.2.3-VERSIONSUFFIX"
+         unpack="false"/>
+
+</feature>

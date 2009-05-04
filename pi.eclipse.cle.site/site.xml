@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/pi.eclipse.cle_0.1.2.3-VERSIONSUFFIX.jar" id="pi.eclipse.cle" version="0.1.2.3-VERSIONSUFFIX">
+      <category name="pi.eclipse.cle"/>
+   </feature>
+   <category-def name="pi.eclipse.cle" label="CUP/LEX">
+      <description>
+         Provides the CLE plugin for Eclipse
+      </description>
+   </category-def>
+</site>

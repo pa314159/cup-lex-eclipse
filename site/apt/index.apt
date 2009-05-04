@@ -1,0 +1,26 @@
+
+Introduction
+
+	CLE is an {{{http://www.eclipse.org}Eclipse}} plugin intented to edit grammar
+	specification files used by {{{http://www2.cs.tum.edu/projects/cup}CUP}} and
+	scanner specification files used by {{{http://jflex.de}JFlex}}.
+
+	CLE is able to generate the Java source files starting from such
+	specification files.
+
+Requirements
+
+	Starting with version 0.1.8, CLE supports only the version 3.4 of
+	Eclipse. Previous versions of Eclipse might work but they haven't been
+	tested.
+	
+	CLE runs on JavaSE-5.0.
+
+Installation
+
+	CLE can be installing using the Eclipse Update Manager
+	from {{{${project.url}/update}CLE Eclipse Update Site}}.
+
+	You can also download the ZIP archive from
+	{{{http://sourceforge.net/projects/cup-lex-eclipse}SourceForce download area}}
+	and extract it directly to the home of your Eclipse installation.

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+	<body>
+		<menu name="Overview">
+			<item name="Introduction" href="${project.url}/index.html" />
+			<item name="FAQs" href="${project.url}/faqs.html" />
+		</menu>
+		<menu name="SourceForge Links">
+			<item name="News" href="https://sourceforge.net/news/?group_id=163121" />
+			<item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=163121"/>
+		</menu>
+		<menu ref="reports" />
+		<menu  name="Modules" inherit="bottom">
+			<item name="CLE Home" href="${project.url}/index.html"/>
+			<item name="CLE Executor" href="${project.url}/cup-lex-exec/index.html"/>
+			<item name="CLE Maven Plugin" href="${project.url}/maven-cup-lex-plugin/index.html"/>
+			<item name="CLE Eclipse Plugin" href="${project.url}/pi.eclipse.cle/index.html"/>
+			<item name="CLE Eclipse Feature" href="${project.url}/pi.eclipse.cle.feature/index.html"/>
+			<item name="CLE Eclipse Update Site" href="${project.url}/update/index.html"/>
+		</menu>
+	</body>
+</project>

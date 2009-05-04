@@ -1,0 +1,183 @@
+
+package pi.eclipse.cle.builders;
+
+import java_cup.runtime.*;
+
+import java.io.*;
+
+import pi.eclipse.cle.CleLog;
+
+parser code
+{:
+	static public void main(String[] args) throws Exception
+	{
+		LexOutLex x = new LexOutLex(new FileReader(args[0]));
+		LexOut p = new LexOut(x);
+
+		p.debug_parse();
+	}
+
+	static final CleLog L = new CleLog(LexOut.class);
+
+	MarkerTool markerTool = null;
+
+	LexOut(java_cup.runtime.Scanner scanner, MarkerTool markerTool)
+	{
+		super(scanner);
+
+		this.markerTool = markerTool;
+	}
+
+	public void debug_message(String string)
+    {
+    	L.debug("%s", string);
+    }
+	
+	public void report_error(String string, Object info)
+    {
+		if( info instanceof Symbol ) {
+			Symbol s = (Symbol)info;
+
+			if( s.left != -1 ) {
+				string += " at character " + s.left + " of input";
+			}
+		}
+
+		L.error("%s", string);
+    }
+:}
+
+action code
+{:
+:}
+
+terminal		WARNING, WARNING_IN;
+terminal		ERROR, ERROR_IN;
+terminal		EOL;
+terminal		Integer NUM;
+terminal		String ANY;
+
+non terminal	output, output_line;
+non terminal	owarning, oerror;
+non terminal	StringBuffer string;
+
+output			::=	output_line output
+				
+				|
+
+				;
+				
+output_line		::= owarning EOL
+				{:
+				:}
+				
+				|	oerror EOL
+				{:
+				:}
+
+				|	string EOL
+				{:
+				:}
+
+				|	EOL
+				{:
+				:}
+
+				|	error:e EOL
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addError("cannot parse output");
+					}
+					else {
+						parser.L.error("cannot parse output: %s", e);
+					}
+				:}
+				;
+
+owarning		::=	WARNING string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addWarning(s);
+					}
+					else {
+						System.out.printf("W: %s\n", s);
+					}
+				:}
+
+				|	WARNING_IN EOL string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addWarning(s);
+					}
+					else {
+						System.out.printf("W: %s\n", s);
+					}
+				:}
+
+				|	WARNING_IN NUM:l string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addWarning(s, l);
+					}
+					else {
+						System.out.printf("W: [%d]: %s\n", l, s);
+					}
+				:}
+
+				|	WARNING_IN NUM:l EOL string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addWarning(s, l);
+					}
+					else {
+						System.out.printf("W: [%d]: %s\n", l, s);
+					}
+				:}
+				
+				;
+
+oerror			::=	ERROR string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addError(s);
+					}
+					else {
+						System.out.printf("E: %s\n", s);
+					}
+				:}
+				
+				|	ERROR_IN EOL string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addError(s);
+					}
+					else {
+						System.out.printf("E: %s\n", s);
+					}
+				:}
+				
+				|	ERROR_IN NUM:l EOL string:s
+				{:
+					if( parser.markerTool != null ) {
+						parser.markerTool.addError(s, l);
+					}
+					else {
+						System.out.printf("E: [%d]: %s\n", l, s);
+					}
+				:}
+
+				;
+
+string			::=	string:x ANY:c
+				{:
+					RESULT = x.append(c);
+				:}
+				
+				|	ANY:c
+				{:
+					RESULT = new StringBuffer(c);
+				:}
+
+				;
+
+
