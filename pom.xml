@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf</groupId>
 	<artifactId>cup-lex-eclipse</artifactId>
 	<name>CLE</name>
-	<version>0.1.8.0</version>
+	<version>0.1.8.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>CUP/LEX Editor plugin for Eclipse</description>
 	<url>http://cup-lex-eclipse.sourceforge.net</url>
@@ -54,8 +55,8 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:https://svn.sourceforge.net/svnroot/cup-lex-eclipse/tags/cup-lex-eclipse-0.1.8.0</connection>
-		<url>https://svn.sourceforge.net/svnroot/cup-lex-eclipse/tags/cup-lex-eclipse-0.1.8.0</url>
+		<connection>scm:svn:https://svn.sourceforge.net/svnroot/cup-lex-eclipse/trunk</connection>
+		<url>https://svn.sourceforge.net/svnroot/cup-lex-eclipse/trunk</url>
 	</scm>
 	<repositories>
 		<repository>
