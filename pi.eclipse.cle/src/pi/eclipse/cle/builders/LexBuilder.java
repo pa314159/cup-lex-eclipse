@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.JavaModelException;
 
 import JFlex.Main;
 import JFlex.Options;
@@ -137,6 +138,18 @@ extends AbstractBuilder
 	@Override
 	protected boolean resourceMatches( IResource resource )
 	{
+		final LexPrefs pref = new LexPrefs( resource );
+
+		try {
+			if( pref.getJavaProject().getOutputLocation().isPrefixOf( resource.getFullPath() ) ) {
+				return false;
+			}
+		}
+		catch( final JavaModelException e ) {
+			e.printStackTrace();
+			return false;
+		}
+
 		return "lex".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
 	}
 

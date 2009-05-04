@@ -15,6 +15,7 @@ import java_cup.Main;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.JavaModelException;
 
 import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.properties.CupPrefs;
@@ -153,11 +154,24 @@ extends AbstractBuilder
 	}
 
 	/**
+	 * @throws JavaModelException
 	 * @see pi.eclipse.cle.builders.AbstractBuilder#resourceMatches(org.eclipse.core.resources.IResource)
 	 */
 	@Override
 	protected boolean resourceMatches( IResource resource )
 	{
+		final CupPrefs pref = new CupPrefs( resource );
+
+		try {
+			if( pref.getJavaProject().getOutputLocation().isPrefixOf( resource.getFullPath() ) ) {
+				return false;
+			}
+		}
+		catch( final JavaModelException e ) {
+			e.printStackTrace();
+			return false;
+		}
+
 		return "cup".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
 	}
 
