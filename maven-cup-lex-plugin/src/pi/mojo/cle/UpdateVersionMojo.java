@@ -98,10 +98,12 @@ extends AbstractMojo
 		final InputStream is = new FileInputStream( temp );
 		final Reader isr = new InputStreamReader( is, this.encoding );
 		final BufferedReader br = new BufferedReader( isr );
+		final String rs = this.with.replace( "-SNAPSHOT", "" );
+
 		String ln = null;
 
 		while( (ln = br.readLine()) != null ) {
-			ln = ln.replace( this.replace, this.with );
+			ln = ln.replace( this.replace, rs );
 
 			pw.println( ln );
 		}
