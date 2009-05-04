@@ -5,7 +5,7 @@
 	<groupId>net.sf</groupId>
 	<artifactId>cup-lex-eclipse</artifactId>
 	<name>CLE</name>
-	<version>0.2.1.0-SNAPSHOT</version>
+	<version>0.1.8.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>CUP/LEX Editor plugin for Eclipse</description>
 	<url>http://cup-lex-eclipse.sourceforge.net</url>
@@ -18,7 +18,7 @@
 	</licenses>
 	<properties>
 		<!-- customize this -->
-		<version-suffix>20090504-1600</version-suffix>
+		<version-suffix>20090505-0000</version-suffix>
 
 		<maven.version>2.0.10</maven.version>
 		<plugin-version>${pom.version}-${version-suffix}</plugin-version>
