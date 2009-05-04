@@ -18,7 +18,7 @@
 	</licenses>
 	<properties>
 		<!-- customize this -->
-		<version-suffix>20090504-1600</version-suffix>
+		<version-suffix>20090504-1700</version-suffix>
 
 		<maven.version>2.0.10</maven.version>
 		<plugin-version>${pom.version}-${version-suffix}</plugin-version>
