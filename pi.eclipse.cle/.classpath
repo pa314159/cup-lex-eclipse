@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="build/classes" path="src"/>
-	<classpathentry kind="src" output="build/classes" path="build/generated-sources/etc"/>
+	<classpathentry excluding="**/*.lex|**/*.cup" kind="src" output="build/classes" path="src"/>
+	<classpathentry excluding="**/*.lex|**/*.cup" kind="src" output="build/classes" path="build/generated-sources/etc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="var" path="CUP_RUNTIME_JAR"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
