@@ -18,7 +18,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>${project.build.outputDirectory}</directory>
-			<outputDirectory>features/pi.eclipse.cle_${pom.version}-${version-suffix}</outputDirectory>
+			<outputDirectory>features/pi.eclipse.cle_${plugin-version}</outputDirectory>
 			<fileMode>0644</fileMode>
 		</fileSet>
 	</fileSets>

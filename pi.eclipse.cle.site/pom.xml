@@ -15,37 +15,10 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<outputDirectory>${project.build.directory}/site-sources/resources/features</outputDirectory>
-									<groupId>${pom.groupId}</groupId>
-									<artifactId>pi.eclipse.cle.feature</artifactId>
-									<destFileName>pi.eclipse.cle_${pom.version}-${version-suffix}.jar</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<outputDirectory>${project.build.directory}/site-sources/resources/plugins</outputDirectory>
-									<groupId>${pom.groupId}</groupId>
-									<artifactId>pi.eclipse.cle</artifactId>
-									<destFileName>pi.eclipse.cle_${pom.version}-${version-suffix}.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>pre-site</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -70,7 +43,7 @@
 				<version>${pom.version}</version>
 				<executions>
 					<execution>
-						<phase>pre-site</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>update-version</goal>
 						</goals>
@@ -81,6 +54,34 @@
 							</includes>
 							<replace>0.1.2.3-VERSIONSUFFIX</replace>
 							<with>${pom.version}-${version-suffix}</with>
+							<property>plugin-version</property>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<outputDirectory>${project.build.directory}/site-sources/resources/features</outputDirectory>
+									<groupId>${pom.groupId}</groupId>
+									<artifactId>pi.eclipse.cle.feature</artifactId>
+									<destFileName>pi.eclipse.cle_${plugin-version}.jar</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<outputDirectory>${project.build.directory}/site-sources/resources/plugins</outputDirectory>
+									<groupId>${pom.groupId}</groupId>
+									<artifactId>pi.eclipse.cle</artifactId>
+									<destFileName>pi.eclipse.cle_${plugin-version}.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>

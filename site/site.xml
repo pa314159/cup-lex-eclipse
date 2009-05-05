@@ -5,14 +5,15 @@
 	<body>
 		<menu name="Overview">
 			<item name="Introduction" href="${project.url}/index.html" />
+			<!--<item name="Documentation" href="${project.url}/documentation.html" />-->
 			<item name="FAQs" href="${project.url}/faqs.html" />
 		</menu>
 		<menu name="SourceForge Links">
+			<item name="Screenshots" href="https://sourceforge.net/project/screenshots.php?group_id=163121" />
 			<item name="News" href="https://sourceforge.net/news/?group_id=163121" />
 			<item name="Downloads" href="https://sourceforge.net/project/showfiles.php?group_id=163121"/>
 		</menu>
-		<menu ref="reports" />
-		<menu  name="Modules" inherit="bottom">
+		<menu  name="Modules">
 			<item name="CLE Home" href="${project.url}/index.html"/>
 			<item name="CLE Executor" href="${project.url}/cup-lex-exec/index.html"/>
 			<item name="CLE Maven Plugin" href="${project.url}/maven-cup-lex-plugin/index.html"/>
@@ -20,5 +21,6 @@
 			<item name="CLE Eclipse Feature" href="${project.url}/pi.eclipse.cle.feature/index.html"/>
 			<item name="CLE Eclipse Update Site" href="${project.url}/update/index.html"/>
 		</menu>
+		<menu ref="reports" />
 	</body>
 </project>

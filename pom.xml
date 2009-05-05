@@ -21,7 +21,7 @@
 		<version-suffix>20090505-0000</version-suffix>
 
 		<maven.version>2.0.10</maven.version>
-		<plugin-version>${pom.version}-${version-suffix}</plugin-version>
+		
 		<site-sources>${project.build.directory}/site-sources</site-sources>
 	</properties>
 	<distributionManagement>
