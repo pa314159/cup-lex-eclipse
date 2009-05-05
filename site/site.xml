@@ -5,7 +5,11 @@
 	<body>
 		<menu name="Overview">
 			<item name="Introduction" href="${project.url}/index.html" />
-			<!--<item name="Documentation" href="${project.url}/documentation.html" />-->
+			<item name="Documentation" href="${project.url}/installation.html">
+				 <item name="Installation" href="${project.url}/installation.html" />
+				 <item name="Eclipse Builders" href="${project.url}/eclipse.html" />
+				 <item name="Customisation" href="${project.url}/customisation.html" />
+			</item>
 			<item name="FAQs" href="${project.url}/faqs.html" />
 		</menu>
 		<menu name="SourceForge Links">
@@ -15,11 +19,11 @@
 		</menu>
 		<menu  name="Modules">
 			<item name="CLE Home" href="${project.url}/index.html"/>
-			<item name="CLE Executor" href="${project.url}/cup-lex-exec/index.html"/>
-			<item name="CLE Maven Plugin" href="${project.url}/maven-cup-lex-plugin/index.html"/>
-			<item name="CLE Eclipse Plugin" href="${project.url}/pi.eclipse.cle/index.html"/>
-			<item name="CLE Eclipse Feature" href="${project.url}/pi.eclipse.cle.feature/index.html"/>
-			<item name="CLE Eclipse Update Site" href="${project.url}/update/index.html"/>
+			<item name="CLE Executor" href="${project.url}/cup-lex-exec/project-info.html"/>
+			<item name="CLE Maven Plugin" href="${project.url}/maven-cup-lex-plugin/project-info.html"/>
+			<item name="CLE Eclipse Plugin" href="${project.url}/pi.eclipse.cle/project-info.html"/>
+			<item name="CLE Eclipse Feature" href="${project.url}/pi.eclipse.cle.feature/project-info.html"/>
+			<item name="CLE Eclipse Update Site" href="${project.url}/update/project-info.html"/>
 		</menu>
 		<menu ref="reports" />
 	</body>

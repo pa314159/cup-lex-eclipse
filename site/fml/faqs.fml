@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faqs xmlns="http://maven.apache.org/FML/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/FML/1.0 http://maven.apache.org/xsd/fml-1.0.xsd" title="Frequently Asked Questions"
-	toplink="false">
+	toplink="true">
 
 	<part id="general">
 		<title>Frequently Asked Questions</title>
-		<faq id="whats-foo">
+		<faq id="package">
 			<question>
 				How can I change the name of the destination package of the generated parser/scanner?
 			</question>
@@ -26,6 +26,18 @@ import java_cup.runtime.*;
 
 //...
 				</source>
+			</answer>
+		</faq>
+		<faq id="class">
+			<question>
+				How can I change the names of the generated classes in LEX files?
+			</question>
+			<answer>
+				<p>
+					Use the
+					<b>%class</b> option provided by JFlex. For more information about the
+					<b>%class</b> option see <a href="http://jflex.de/manual.html#SECTION00052000000000000000" target="_blank">this link</a>.
+				</p>
 			</answer>
 		</faq>
 	</part>

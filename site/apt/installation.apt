@@ -1,0 +1,52 @@
+Installation
+
+	Installation of CLE is straightforward, simply use the Eclipse Update Manager
+
+	[[1]] From the Eclipse menu choose <<Help>>|<<Software Updates>>
+	
+	[[1]] Switch to the <<Available Software>> tab if needed
+	
+	[[1]] Press <<Add Site>>
+	
+	[[1]] Fill-in the dialog box with CLE update location: <<${project.url}/update>>
+
+[s.gif]
+
+[update-1.gif]
+
+[s.gif]
+
+	[[1]] In the Update window, you will now see the <<CUP/LEX>> category; select it then press <<Install>>.
+
+[s.gif]
+
+[update-2.gif]
+
+[s.gif]
+
+	[[1]] Confirm the installation by pressing <<Finish>>.
+
+[s.gif]
+
+[update-3.gif]
+
+[s.gif]
+
+	[[1]] Wait for the Update Manager to finish the plugin installation.
+	
+	[[1]] Press <<Yes>> to restart Eclipse.
+
+[s.gif]
+
+[update-4.gif]
+
+[s.gif]
+
+	[[1]] That's all!
+
+Understanding Eclipse Builders
+
+Customising CUP output
+
+Customising JFlex output
+
