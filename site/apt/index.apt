@@ -19,7 +19,8 @@ Requirements
 Installation
 
 	CLE can be installed using the Eclipse Update Manager
-	from {{{${project.url}/update}CLE Eclipse Update Site}}.
+	from {{{${project.url}/update}CLE Eclipse Update Site}}. For step by step
+	instruction check the {{{${project.url}/installation.html}documentation}}.
 
 	You can also download the ZIP archive from
 	{{{http://sourceforge.net/projects/cup-lex-eclipse}SourceForce download area}}
