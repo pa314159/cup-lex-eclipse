@@ -11,7 +11,6 @@ import java.io.IOException;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jdt.core.JavaModelException;
 
 import JFlex.Main;
 import JFlex.Options;
@@ -26,6 +25,11 @@ public class LexBuilder
 extends AbstractBuilder
 {
 	public static final String	ID	= ClePlugin.ID + "." + "LexBuilder";	//$NON-NLS-1$ //$NON-NLS-2$
+
+	public LexBuilder()
+	{
+		super( "lex" );
+	}
 
 	/**
 	 * @param ln
@@ -65,6 +69,11 @@ extends AbstractBuilder
 		final LexPrefs pref = new LexPrefs( resource );
 		final File iFile = resource.getLocation().toFile();
 		final IResource dest = resource.getProject().findMember( pref.getJavaFolder() );
+
+		if( dest == null ) {
+			return;
+		}
+
 		File fDest = dest.getLocation().toFile();
 		final String[] packageAndClass = findPackageAndClass( iFile );
 
@@ -89,6 +98,11 @@ extends AbstractBuilder
 		final LexPrefs pref = new LexPrefs( resource );
 		final File iFile = resource.getLocation().toFile();
 		final IResource dest = resource.getProject().findMember( pref.getJavaFolder() );
+
+		if( dest == null ) {
+			return;
+		}
+
 		File fDest = dest.getLocation().toFile();
 		final StringBuilder args = new StringBuilder();
 		final String packageName = findPackageAndClass( iFile )[0];
@@ -130,27 +144,6 @@ extends AbstractBuilder
 		fDest.mkdirs();
 
 		launchJava( progressMonitor, pref, Main.class, args.toString() );
-	}
-
-	/**
-	 * @see pi.eclipse.cle.builders.AbstractBuilder#resourceMatches(org.eclipse.core.resources.IResource)
-	 */
-	@Override
-	protected boolean resourceMatches( IResource resource )
-	{
-		final LexPrefs pref = new LexPrefs( resource );
-
-		try {
-			if( pref.getJavaProject().getOutputLocation().isPrefixOf( resource.getFullPath() ) ) {
-				return false;
-			}
-		}
-		catch( final JavaModelException e ) {
-			e.printStackTrace();
-			return false;
-		}
-
-		return "lex".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
 	}
 
 	/**

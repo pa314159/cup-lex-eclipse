@@ -30,6 +30,9 @@ public enum ClePreferences
 	/** */
 	LEX_QUIET,
 
+	/** internal use */
+	LEX_OUTPUTS,
+
 	/** */
 	CUP_OUTPUT,
 
@@ -71,6 +74,9 @@ public enum ClePreferences
 
 	/** */
 	CUP_NO_SCANNER,
+
+	/** internal use */
+	CUP_OUTPUTS,
 
 	/** */
 	;

@@ -15,7 +15,6 @@ import java_cup.Main;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jdt.core.JavaModelException;
 
 import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.properties.CupPrefs;
@@ -28,6 +27,11 @@ extends AbstractBuilder
 {
 
 	public static final String	ID	= ClePlugin.ID + "." + "CupBuilder";	//$NON-NLS-1$ //$NON-NLS-2$
+
+	public CupBuilder()
+	{
+		super( "cup" );
+	}
 
 	/**
 	 * @param resource
@@ -64,6 +68,11 @@ extends AbstractBuilder
 		final CupPrefs pref = new CupPrefs( resource );
 		final File iFile = resource.getLocation().toFile();
 		final IResource dest = resource.getProject().findMember( pref.getJavaFolder() );
+
+		if( dest == null ) {
+			return;
+		}
+
 		File fDest = dest.getLocation().toFile();
 		final String packageName = findPackageAndClass( iFile )[0];
 
@@ -91,6 +100,11 @@ extends AbstractBuilder
 		final CupPrefs pref = new CupPrefs( resource );
 		final File iFile = resource.getLocation().toFile();
 		final IResource dest = resource.getProject().findMember( pref.getJavaFolder() );
+
+		if( dest == null ) {
+			return;
+		}
+
 		File fDest = dest.getLocation().toFile();
 		final StringBuilder args = new StringBuilder();
 		final String packageName = findPackageAndClass( iFile )[0];
@@ -154,28 +168,6 @@ extends AbstractBuilder
 	}
 
 	/**
-	 * @throws JavaModelException
-	 * @see pi.eclipse.cle.builders.AbstractBuilder#resourceMatches(org.eclipse.core.resources.IResource)
-	 */
-	@Override
-	protected boolean resourceMatches( IResource resource )
-	{
-		final CupPrefs pref = new CupPrefs( resource );
-
-		try {
-			if( pref.getJavaProject().getOutputLocation().isPrefixOf( resource.getFullPath() ) ) {
-				return false;
-			}
-		}
-		catch( final JavaModelException e ) {
-			e.printStackTrace();
-			return false;
-		}
-
-		return "cup".equalsIgnoreCase( resource.getFileExtension() ); //$NON-NLS-1$
-	}
-
-	/**
 	 * @param chars
 	 * @throws CoreException
 	 * @throws IOException
@@ -183,29 +175,6 @@ extends AbstractBuilder
 	@Override
 	void collectErrors( IResource resource, char[] chars )
 	{
-		// BufferedReader br = new BufferedReader();
-		// String ln = null;
-		//
-		// while( (ln = br.readLine()) != null ) {
-		// // System.out.println(ln);
-		//
-		// L.trace("CUP: %s", ln); //$NON-NLS-1$
-		//
-		// try {
-		// if( ln.startsWith("Error ") ) { //$NON-NLS-1$
-		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
-		// }
-		// if( ln.startsWith("Fatal ") ) { //$NON-NLS-1$
-		// addCupError(resource, ln.substring(6)); //$NON-NLS-1$
-		// }
-		// if( ln.startsWith("Warning ") ) { //$NON-NLS-1$
-		// addCupWarning(resource, ln.substring(8)); //$NON-NLS-1$
-		// }
-		// }
-		// catch( Throwable t ) {
-		// addError(resource, t.getLocalizedMessage(), 0);
-		// }
-		// }
 		final MarkerTool t = new MarkerTool( resource, markerType() );
 		final CupOutLex s = new CupOutLex( new CharArrayReader( chars ) );
 		final CupOut p = new CupOut( s, t );

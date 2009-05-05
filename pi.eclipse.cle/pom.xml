@@ -78,6 +78,7 @@
 							</includes>
 							<replace>0.1.2.3-VERSIONSUFFIX</replace>
 							<with>${pom.version}-${version-suffix}</with>
+							<property>plugin-version</property>
 						</configuration>
 					</execution>
 				</executions>

@@ -5,14 +5,16 @@ import static pi.eclipse.cle.CleVariablesInitializer.VARS.CUP_RUNTIME_JAR;
 import static pi.eclipse.cle.CleVariablesInitializer.VARS.LEX_JAR;
 
 import java.io.BufferedReader;
-import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -25,6 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
@@ -32,13 +35,13 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamMonitor;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.eclipse.jdt.launching.IVMInstall;
@@ -75,7 +78,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		 */
 		public boolean visit( IResource resource )
 		{
-			if( resourceMatches( resource ) ) {
+			if( resourceAccept( resource ) ) {
 				cleanResource( this.progressMonitor, resource );
 				buildResource( this.progressMonitor, resource );
 			}
@@ -102,7 +105,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		 */
 		public boolean visit( IResource resource )
 		{
-			if( resourceMatches( resource ) ) {
+			if( resourceAccept( resource ) ) {
 				cleanResource( this.progressMonitor, resource );
 			}
 
@@ -128,7 +131,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 			switch( delta.getKind() ) {
 				case IResourceDelta.ADDED:
 				case IResourceDelta.CHANGED:
-					if( resourceMatches( delta.getResource() ) ) {
+					if( resourceAccept( delta.getResource() ) ) {
 						cleanResource( this.progressMonitor, delta.getResource() );
 						buildResource( this.progressMonitor, delta.getResource() );
 					}
@@ -139,37 +142,19 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 	}
 
-	/**
-	 * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
-	 */
-	final class ProcessData
-	implements IStreamListener
-	{
-		final AbstractPref		preferences;
-
-		final CharArrayWriter	out	= new CharArrayWriter();
-
-		ProcessData( AbstractPref preferences )
-		{
-			this.preferences = preferences;
-		}
-
-		public void streamAppended( String text, IStreamMonitor monitor )
-		{
-			// L.trace("PROCESS: %s", text.replace("\n", "\\n")); //$NON-NLS-1$
-			// //$NON-NLS-2$ //$NON-NLS-3$
-
-			System.out.print( text );
-			System.out.flush();
-
-			this.out.append( text );
-		}
-	}
-
 	final CleLog	L			= new CleLog( getClass() );
 
 	/**  */
 	final Map		processData	= new HashMap();
+
+	IJavaProject	javaProject;
+
+	final String	extension;
+
+	public AbstractBuilder( String extension )
+	{
+		this.extension = extension;
+	}
 
 	/**
 	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
@@ -187,7 +172,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 			final IProcess p = (IProcess) events[k].getSource();
 			final String n = p.getLaunch().getLaunchConfiguration().getName();
-			final ProcessData d = (ProcessData) this.processData.get( n );
+			final JavaProcessData d = (JavaProcessData) this.processData.get( n );
 
 			if( d == null ) {
 				continue;
@@ -274,6 +259,8 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	@Override
 	protected IProject[] build( int kind, Map args, IProgressMonitor monitor ) throws CoreException
 	{
+		updateExclusions();
+
 		if( kind == FULL_BUILD ) {
 			fullBuild( monitor );
 		}
@@ -374,10 +361,16 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	}
 
 	/**
-	 * @param resource
-	 * @return
+	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#startupOnInitialize()
 	 */
-	protected abstract boolean resourceMatches( IResource resource );
+	@Override
+	protected void startupOnInitialize()
+	{
+		super.startupOnInitialize();
+
+		this.javaProject = JavaCore.create( getProject() );
+
+	}
 
 	void buildResource( IProgressMonitor progressMonitor, IResource resource )
 	{
@@ -453,7 +446,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		final String lwn = lwp.toPortableString();
 		final ILaunchConfigurationWorkingCopy lwc = typ.newInstance( preferences.getEclipseProject(), lwn );
 		final IVMInstall jre = JavaRuntime.getVMInstall( preferences.getJavaProject() );
-		final ProcessData rpd = new ProcessData( preferences );
+		final JavaProcessData rpd = new JavaProcessData( preferences );
 
 		updateClassPath( preferences.getJavaProject() );
 
@@ -500,6 +493,48 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 		}
 	}
 
+	final boolean resourceAccept( IResource resource )
+	{
+		if( !this.extension.equalsIgnoreCase( resource.getFileExtension() ) ) {
+			return false;
+		}
+
+		try {
+			for( final IClasspathEntry e : this.javaProject.getResolvedClasspath( true ) ) {
+				if( e.getEntryKind() != IClasspathEntry.CPE_SOURCE ) {
+					continue;
+				}
+
+				System.out.println( e.getExclusionPatterns() );
+
+				final IPath outputLocation = e.getOutputLocation();
+
+				if( outputLocation == null ) {
+					continue;
+				}
+
+				if( outputLocation.isPrefixOf( resource.getFullPath() ) ) {
+					return false;
+				}
+			}
+		}
+		catch( final JavaModelException e ) {
+			e.printStackTrace();
+		}
+
+		try {
+			if( this.javaProject.getOutputLocation().isPrefixOf( resource.getFullPath() ) ) {
+				return false;
+			}
+		}
+		catch( final JavaModelException e ) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * @param javaProject
 	 * @throws CoreException
@@ -521,6 +556,43 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 			project.setRawClasspath( newCpes, null );
 		}
+	}
+
+	void updateExclusions() throws JavaModelException
+	{
+		final IClasspathEntry[] oldCp = this.javaProject.getRawClasspath();
+		final IClasspathEntry[] newCp = new IClasspathEntry[oldCp.length];
+
+		for( int k = 0; k < oldCp.length; k++ ) {
+			final IClasspathEntry oldEnt = oldCp[k];
+
+			if( oldEnt.getEntryKind() != IClasspathEntry.CPE_SOURCE ) {
+				newCp[k] = oldEnt;
+
+				continue;
+			}
+
+			final IPath cupEx = new Path( "**/*.cup" );
+			final IPath lexEx = new Path( "**/*.lex" );
+
+			final Set<IPath> ex = new HashSet<IPath>( Arrays.asList( oldEnt.getExclusionPatterns() ) );
+
+			if( ex.contains( cupEx ) && ex.contains( lexEx ) ) {
+				newCp[k] = oldEnt;
+
+				continue;
+			}
+
+			ex.add( cupEx );
+			ex.add( lexEx );
+
+			final IClasspathEntry newEnt = JavaCore.newSourceEntry( oldEnt.getPath(), oldEnt.getInclusionPatterns(),
+				ex.toArray( new IPath[0] ), oldEnt.getOutputLocation(), oldEnt.getExtraAttributes() );
+
+			newCp[k] = newEnt;
+		}
+
+		this.javaProject.setRawClasspath( newCp, true, null );
 	}
 
 }

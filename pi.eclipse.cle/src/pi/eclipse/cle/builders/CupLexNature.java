@@ -23,7 +23,7 @@ implements IProjectNature
 	 * @param project
 	 *            to have sample nature added or removed
 	 */
-	static public void addNature( IProject project )
+	static public void updateProject( IProject project )
 	{
 		try {
 			project.refreshLocal( IResource.DEPTH_INFINITE, null );
@@ -39,9 +39,12 @@ implements IProjectNature
 
 			// Add the nature
 			final String[] newNatures = new String[natures.length + 1];
+
 			System.arraycopy( natures, 0, newNatures, 1, natures.length );
 			newNatures[0] = ID;
+
 			description.setNatureIds( newNatures );
+
 			project.setDescription( description, null );
 		}
 		catch( final CoreException e ) {

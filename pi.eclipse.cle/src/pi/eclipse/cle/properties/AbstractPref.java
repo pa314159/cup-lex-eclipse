@@ -41,7 +41,7 @@ public abstract class AbstractPref
 
 		final IScopeContext scopeContext = new ProjectScope( eproject );
 
-		CupLexNature.addNature( eproject );
+		CupLexNature.updateProject( this.eproject );
 
 		this.preferences = scopeContext.getNode( ClePlugin.ID );
 	}
@@ -142,7 +142,6 @@ public abstract class AbstractPref
 	/**
 	 * @param k
 	 * @param d
-	 *            TODO
 	 * @return
 	 */
 	protected boolean getBooleanPref( ClePreferences e )

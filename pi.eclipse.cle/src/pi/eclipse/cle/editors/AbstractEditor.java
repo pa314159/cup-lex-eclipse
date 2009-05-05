@@ -26,7 +26,7 @@ extends TextEditor
 		if( input instanceof IFileEditorInput ) {
 			final IFileEditorInput fei = (IFileEditorInput) input;
 
-			CupLexNature.addNature( fei.getFile().getProject() );
+			CupLexNature.updateProject( fei.getFile().getProject() );
 		}
 	}
 
