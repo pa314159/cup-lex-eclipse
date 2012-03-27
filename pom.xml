@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf</groupId>
 	<artifactId>cup-lex-eclipse</artifactId>
@@ -17,22 +18,18 @@
 		</license>
 	</licenses>
 	<properties>
-		<!-- customize this -->
-		<version-suffix>20090505-1600</version-suffix>
-
-		<maven.version>2.0.10</maven.version>
-		
+		<version-suffix>20120327-1800</version-suffix>
 		<site-sources>${project.build.directory}/site-sources</site-sources>
 	</properties>
 	<distributionManagement>
 		<repository>
-			<id>cle-release</id>
-			<url>${cle-release-url}</url>
+			<id>cle-releases</id>
+			<url>${cle-releases-url}</url>
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
 		<snapshotRepository>
-			<id>cle-snapshot</id>
-			<url>${cle-snapshot-url}</url>
+			<id>cle-snapshots</id>
+			<url>${cle-snapshots-url}</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 		<site>
@@ -59,11 +56,17 @@
 	</scm>
 	<repositories>
 		<repository>
-			<id>pa314159-sf-net</id>
-			<name>pa314159-sf-net</name>
-			<url>http://pa314159.users.sourceforge.net/maven2</url>
+			<id>cle-releases</id>
+			<url>http://pa314159.users.sourceforge.net/releases</url>
 			<snapshots>
 				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>cle-snapshots</id>
+			<url>http://pa314159.users.sourceforge.net/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
@@ -91,11 +94,17 @@
 	</profiles>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>pa314159-sf-net</id>
-			<name>pa314159-sf-net</name>
-			<url>http://pa314159.users.sourceforge.net/maven2</url>
+			<id>cle-releases</id>
+			<url>http://pa314159.users.sourceforge.net/releases</url>
 			<snapshots>
 				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>cle-snapshots</id>
+			<url>http://pa314159.users.sourceforge.net/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
@@ -118,28 +127,34 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.0.2</version>
+					<version>2.3.2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.3</version>
+					<version>2.5</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>2.0-beta-7</version>
+					<version>3.0-beta-3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.2</version>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<compilerVersion>1.5</compilerVersion>
@@ -149,6 +164,7 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
 					<filesets>
@@ -167,6 +183,7 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
@@ -190,6 +207,7 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<configuration>
 					<siteDirectory>${site-sources}</siteDirectory>
@@ -197,13 +215,14 @@
 					<outputEncoding>UTF-8</outputEncoding>
 				</configuration>
 			</plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <preparationGoals>clean install</preparationGoals>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<preparationGoals>clean install</preparationGoals>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -211,15 +230,16 @@
 		<outputDirectory>${project.build.directory}/site</outputDirectory>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<reportSets>
 					<reportSet>
 						<reports>
-							<!--<report>index</report>-->
+							<!--<report>index</report> -->
 							<report>summary</report>
 							<report>project-team</report>
 							<report>license</report>
-							<!--<report>dependencies</report>-->
+							<!--<report>dependencies</report> -->
 							<report>scm</report>
 						</reports>
 					</reportSet>

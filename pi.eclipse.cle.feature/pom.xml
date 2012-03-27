@@ -23,9 +23,9 @@
 		</resources>
 		<plugins>
 			<plugin>
-				<groupId>${pom.groupId}</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>maven-cup-lex-plugin</artifactId>
-				<version>${pom.version}</version>
+				<version>${project.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -36,7 +36,7 @@
 								<include>**/feature.*</include>
 							</includes>
 							<replace>0.1.2.3-VERSIONSUFFIX</replace>
-							<with>${pom.version}-${version-suffix}</with>
+							<with>${project.version}-${version-suffix}</with>
 							<property>plugin-version</property>
 						</configuration>
 					</execution>
@@ -54,7 +54,7 @@
 							<outputDirectory>${project.build.directory}/plugins</outputDirectory>
 							<artifactItems>
 								<artifactItem>
-									<groupId>${pom.groupId}</groupId>
+									<groupId>${project.groupId}</groupId>
 									<artifactId>pi.eclipse.cle</artifactId>
 									<destFileName>pi.eclipse.cle_${plugin-version}.jar</destFileName>
 								</artifactItem>
@@ -84,9 +84,9 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>pi.eclipse.cle</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>
