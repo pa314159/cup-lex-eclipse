@@ -51,8 +51,8 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:https://svn.sourceforge.net/svnroot/cup-lex-eclipse/trunk</connection>
-		<url>https://svn.sourceforge.net/svnroot/cup-lex-eclipse/trunk</url>
+		<connection>scm:git:git://github.com/pa314159/cup-lex-eclipse.git</connection>
+		<developerConnection>scm:git:git@github.com:pa314159/cup-lex-eclipse.git</developerConnection>
 	</scm>
 	<repositories>
 		<repository>
