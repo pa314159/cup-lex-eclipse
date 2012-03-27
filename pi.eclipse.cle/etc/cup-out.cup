@@ -145,9 +145,23 @@ string			::=	string:x ANY:c
 					RESULT = x.append(c);
 				:}
 				
+				|	string:x NUM:n
+				{:
+					RESULT = x.append(n);
+				:}
+				
 				|	ANY:c
 				{:
-					RESULT = new StringBuilder(c);
+					RESULT = new StringBuilder();
+					
+					RESULT.append(c);
+				:}
+				
+				|	NUM:n
+				{:
+					RESULT = new StringBuilder();
+					
+					RESULT.append(n);
 				:}
 
 				;

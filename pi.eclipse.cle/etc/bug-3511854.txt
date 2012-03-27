@@ -1,0 +1,16 @@
+Warning : *** Shift/Reduce conflict found in state #24
+  between Esp ::= Esp CAP Esp (*) 
+  and     Esp ::= Esp (*) CAP Esp 
+  under symbol CAP
+  Resolved in favor of shifting.
+
+------- CUP v0.11a beta 20060608 Parser Generation Summary -------
+  0 errors and 1 warning
+  18 terminals, 7 non-terminals, and 20 productions declared, 
+  producing 38 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  1 conflict detected (1 expected).
+  Code written to "ParserCup.java", and "ParserSym.java".
+---------------------------------------------------- (v0.11a beta 20060608)
