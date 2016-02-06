@@ -1,35 +1,30 @@
+
 package pi.mojo.cle;
 
 import java.util.List;
 
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
 import pi.cle.exec.CupConfig;
 
-/**
- * @goal cup
- * @phase generate-sources
- * @author Pappy Răzvan STĂNESCU <a href="mailto:pappy&#64;clarmon.com">&lt;pappy&#64;clarmon.com&gt;</a>
- */
+@Mojo( name = "cup", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES )
 public class CupMojo
 extends AbstractCupMojo
 {
 
-	/**
-	 * @parameter name="cup"
-	 */
-	private CupConfig	cup;
+	@Parameter
+	private CupConfig cup;
 
-	/**
-	 * @parameter name="sourceDirectory" default-value="${basedir}/src/main/etc"
-	 */
-	private String		sourceDirectory;
+	@Parameter( defaultValue = "${basedir}/src/main/cup-lex" )
+	private String sourceDirectory;
 
-	/**
-	 * @parameter name="outputDirectory" default-value="${project.build.directory}/generated-sources/etc"
-	 */
-	private String		outputDirectory;
+	@Parameter( defaultValue = "${project.build.directory}/generated-sources/cup-lex" )
+	private String outputDirectory;
 
 	@Override
-	CupConfig config()
+	synchronized CupConfig config()
 	{
 		if( this.cup == null ) {
 			this.cup = new CupConfig();

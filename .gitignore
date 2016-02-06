@@ -10,4 +10,6 @@ classes/
 local.properties
 .project
 .classpath
+.settings/
+.external*
 DESCRIPTION.txt

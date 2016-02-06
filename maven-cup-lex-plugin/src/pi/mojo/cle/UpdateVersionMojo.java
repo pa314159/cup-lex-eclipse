@@ -1,3 +1,4 @@
+
 package pi.mojo.cle;
 
 import java.io.BufferedReader;
@@ -15,56 +16,39 @@ import java.io.Writer;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.FileUtils;
 
-/**
- * @goal update-version
- * @phase process-resources
- * @author Pappy Răzvan STĂNESCU <a href="mailto:pappy&#64;clarmon.com">&lt;pappy&#64;clarmon.com&gt;</a>
- */
+@Mojo( name = "update-version", defaultPhase = LifecyclePhase.PROCESS_RESOURCES )
 public class UpdateVersionMojo
 extends AbstractMojo
 {
-	/**
-	 * @parameter expression="${project.build.outputDirectory}"
-	 * @required
-	 */
-	private File		outputDirectory;
 
-	/**
-	 * @parameter
-	 * @required
-	 */
-	private String		replace;
+	@Parameter( property = "project.build.outputDirectory", required = true )
+	private File outputDirectory;
 
-	/**
-	 * @parameter
-	 * @required
-	 */
-	private String		with;
+	@Parameter( required = true )
+	private String replace;
 
-	/**
-	 * @parameter default-value="UTF-8"
-	 */
-	private String		encoding;
+	@Parameter( required = true )
+	private String with;
 
-	/**
-	 * @parameter
-	 */
-	private String[]	includes;
+	@Parameter( required = true, defaultValue = "UTF-8" )
+	private String encoding;
 
-	/**
-	 * @parameter
-	 */
-	private String[]	excludes;
+	@Parameter
+	private String[] includes;
 
-	/**
-	 * @parameter
-	 * @required
-	 */
-	private String		property;
+	@Parameter
+	private String[] excludes;
 
+	@Parameter
+	private String property;
+
+	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException
 	{
 		this.with = this.with.replace( "-SNAPSHOT", "" );
@@ -110,7 +94,7 @@ extends AbstractMojo
 
 		String ln = null;
 
-		while( (ln = br.readLine()) != null ) {
+		while( ( ln = br.readLine() ) != null ) {
 			ln = ln.replace( this.replace, this.with );
 
 			pw.println( ln );

@@ -1,13 +1,14 @@
+
 package pi.mojo.cle;
+
+import org.apache.maven.plugins.annotations.Parameter;
 
 public abstract class AbstractCupMojo
 extends AbstractCupLexMojo
 {
 
-	/**
-	 * @parameter default-value="cup"
-	 */
-	private String	cupSuffix;
+	@Parameter( defaultValue = "cup" )
+	private String cupSuffix;
 
 	@Override
 	String suffix()

@@ -1,34 +1,30 @@
+
 package pi.mojo.cle;
 
 import java.util.List;
 
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
 import pi.cle.exec.LexConfig;
 
-/**
- * @goal test-lex
- * @phase generate-sources
- * @author Pappy Răzvan STĂNESCU <a href="mailto:pappy&#64;clarmon.com">&lt;pappy&#64;clarmon.com&gt;</a>
- */
+@Mojo( name = "test-lex", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_SOURCES )
 public class TestLexMojo
 extends AbstractLexMojo
 {
-	/**
-	 * @parameter name="sourceDirectory" default-value="${basedir}/src/test/etc"
-	 */
-	private String		sourceDirectory;
 
-	/**
-	 * @parameter name="outputDirectory" default-value="${project.build.directory}/test-generated-sources/etc"
-	 */
-	private String		outputDirectory;
+	@Parameter
+	private LexConfig lex;
 
-	/**
-	 * @parameter name="testLex"
-	 */
-	private LexConfig	lex;
+	@Parameter( defaultValue = "${basedir}/src/test/cup-lex" )
+	private String sourceDirectory;
+
+	@Parameter( defaultValue = "${project.build.directory}/generated-test-sources/cup-lex" )
+	private String outputDirectory;
 
 	@Override
-	LexConfig config()
+	synchronized LexConfig config()
 	{
 		if( this.lex == null ) {
 			this.lex = new LexConfig();

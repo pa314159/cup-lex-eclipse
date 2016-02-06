@@ -1,13 +1,14 @@
+
 package pi.mojo.cle;
+
+import org.apache.maven.plugins.annotations.Parameter;
 
 public abstract class AbstractLexMojo
 extends AbstractCupLexMojo
 {
 
-	/**
-	 * @parameter default-value="lex"
-	 */
-	private String	lexSuffix;
+	@Parameter( defaultValue = "lex" )
+	private String lexSuffix;
 
 	@Override
 	String suffix()

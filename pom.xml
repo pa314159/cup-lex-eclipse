@@ -5,11 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf</groupId>
 	<artifactId>cup-lex-eclipse</artifactId>
-	<name>CLE</name>
-	<version>0.1.8.2-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 	<description>CUP/LEX Editor plugin for Eclipse</description>
+
 	<url>http://cup-lex-eclipse.sourceforge.net</url>
+
+	<inceptionYear>2006</inceptionYear>
 	<licenses>
 		<license>
 			<distribution>update</distribution>
@@ -17,32 +20,11 @@
 			<url>http://www.gnu.org/licenses/gpl.txt</url>
 		</license>
 	</licenses>
-	<properties>
-		<version-suffix>20120327-1800</version-suffix>
-		<site-sources>${project.build.directory}/site-sources</site-sources>
-	</properties>
-	<distributionManagement>
-		<repository>
-			<id>cle-releases</id>
-			<url>${cle-releases-url}</url>
-			<uniqueVersion>false</uniqueVersion>
-		</repository>
-		<snapshotRepository>
-			<id>cle-snapshots</id>
-			<url>${cle-snapshots-url}</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-		<site>
-			<id>cle-site</id>
-			<url>${cle-site-url}</url>
-		</site>
-	</distributionManagement>
-	<inceptionYear>2006</inceptionYear>
 	<developers>
 		<developer>
 			<id>pa314159</id>
-			<name>Pappy Răzvan STĂNESCU</name>
-			<email>pa314159@users.sf.net</email>
+			<name>Pappy STĂNESCU</name>
+			<email>root@undisclosed.com</email>
 			<url>http://www.linkedin.com/in/pappy</url>
 			<roles>
 				<role>admin</role>
@@ -51,6 +33,7 @@
 		</developer>
 	</developers>
 	<scm>
+		<url>https://github.com/pa314159/cup-lex-eclipse</url>
 		<connection>scm:git:git://github.com/pa314159/cup-lex-eclipse.git</connection>
 		<developerConnection>scm:git:git@github.com:pa314159/cup-lex-eclipse.git</developerConnection>
 	</scm>
@@ -62,36 +45,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>cle-snapshots</id>
-			<url>http://pa314159.users.sourceforge.net/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
 	</repositories>
-	<profiles>
-		<profile>
-			<id>sources</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-source-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>cle-releases</id>
@@ -100,14 +54,34 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-		<pluginRepository>
-			<id>cle-snapshots</id>
-			<url>http://pa314159.users.sourceforge.net/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>cle-releases</id>
+			<url>${cle-releases-url}</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>cle-snapshots</id>
+			<url>${cle-snapshots-url}</url>
+			<uniqueVersion>true</uniqueVersion>
+		</snapshotRepository>
+ 		<site>
+			<id>cle-site</id>
+			<url>${cle-site-url}</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<mvn.version>3.3.9</mvn.version>
+
+		<java.version>1.6</java.version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version-suffix>20120327-1800</version-suffix>
+		<site-sources>${project.build.directory}/site-sources</site-sources>
+	</properties>
+
 	<modules>
 		<module>cup-lex-exec</module>
 		<module>maven-cup-lex-plugin</module>
@@ -115,53 +89,149 @@
 		<module>pi.eclipse.cle.feature</module>
 		<module>pi.eclipse.cle.site</module>
 	</modules>
+
 	<build>
 		<defaultGoal>install</defaultGoal>
-		<directory>${basedir}/build</directory>
+
 		<sourceDirectory>${basedir}/src</sourceDirectory>
-		<scriptSourceDirectory>etc</scriptSourceDirectory>
 		<testSourceDirectory>${basedir}/tests</testSourceDirectory>
-		<outputDirectory>${project.build.directory}/classes</outputDirectory>
-		<testOutputDirectory>${project.build.directory}/tests-classes</testOutputDirectory>
+		<scriptSourceDirectory>etc</scriptSourceDirectory>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.4.1</version>
+					<version>3.0.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>3.5</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
+					<version>2.7</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.0-beta-3</version>
+					<version>3.4</version>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>3.4</version>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>net.sf.cup-lex-eclipse</groupId>
+										<artifactId>cup-lex-maven-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>cup</goal>
+											<goal>lex</goal>
+											<goal>update-version</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>${mvn.version}</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<compilerVersion>1.5</compilerVersion>
-					<source>1.5</source>
-					<target>1.5</target>
+					<compilerVersion>${java.version}</compilerVersion>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -172,8 +242,10 @@
 							<directory>${basedir}</directory>
 							<includes>
 								<include>lib</include>
+								<include>bin</include>
 								<include>output</include>
 								<include>build</include>
+								<include>target</include>
 								<include>*log</include>
 								<include>*tmp</include>
 								<include>temp-*</include>
@@ -224,14 +296,28 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>2.10</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.10</version>
+			</extension>
+		</extensions>
 	</build>
+
 	<reporting>
 		<excludeDefaults>true</excludeDefaults>
-		<outputDirectory>${project.build.directory}/site</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8.1</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -247,4 +333,68 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>cup-lex-exec</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>jflex</groupId>
+				<artifactId>jflex</artifactId>
+				<version>1.4.3</version>
+			</dependency>
+			<dependency>
+				<groupId>java-cup</groupId>
+				<artifactId>java-cup</artifactId>
+				<version>0.11a-beta-20060608</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.7.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-artifact</artifactId>
+				<version>${mvn.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-api</artifactId>
+				<version>${mvn.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-model</artifactId>
+				<version>${mvn.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-core</artifactId>
+				<version>${mvn.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-project</artifactId>
+				<version>2.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugin-tools</groupId>
+				<artifactId>maven-plugin-annotations</artifactId>
+				<version>3.4</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-utils</artifactId>
+				<version>3.0.22</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 </project>
