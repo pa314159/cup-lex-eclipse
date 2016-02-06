@@ -4,7 +4,6 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class LexSourceViewerConfiguration
 extends SourceViewerConfiguration

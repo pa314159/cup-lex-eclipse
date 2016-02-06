@@ -5,7 +5,6 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.ui.INewWizard;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupNewWizard
 extends AbstractWizard
@@ -46,7 +45,7 @@ implements INewWizard
 	{
 		final CupNewWizardWidget1 widget = this.page1.getControl();
 
-		context.put( "PACKAGE", widget.txPackage.getText() ); //$NON-NLS-1$
+		context.put( "PACKAGE", widget.txPackage.getText() ); 
 	}
 
 	/**
@@ -64,7 +63,7 @@ implements INewWizard
 	@Override
 	String getFileExtension()
 	{
-		return "cup"; //$NON-NLS-1$
+		return "cup"; 
 	}
 
 }

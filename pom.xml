@@ -241,11 +241,7 @@
 						<fileset>
 							<directory>${basedir}</directory>
 							<includes>
-								<include>lib</include>
-								<include>bin</include>
-								<include>output</include>
-								<include>build</include>
-								<include>target</include>
+								<include>lib/**/*.*</include>
 								<include>*log</include>
 								<include>*tmp</include>
 								<include>temp-*</include>
@@ -343,14 +339,20 @@
 			</dependency>
 
 			<dependency>
-				<groupId>jflex</groupId>
+				<groupId>de.jflex</groupId>
 				<artifactId>jflex</artifactId>
-				<version>1.4.3</version>
+				<version>1.6.1</version>
 			</dependency>
 			<dependency>
 				<groupId>java-cup</groupId>
 				<artifactId>java-cup</artifactId>
 				<version>0.11a-beta-20060608</version>
+			</dependency>
+			<dependency>
+				<groupId>java-cup</groupId>
+				<artifactId>java-cup</artifactId>
+				<version>0.11a-beta-20060608</version>
+				<classifier>runtime</classifier>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.ant</groupId>
@@ -394,7 +396,6 @@
 				<artifactId>plexus-utils</artifactId>
 				<version>3.0.22</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 </project>

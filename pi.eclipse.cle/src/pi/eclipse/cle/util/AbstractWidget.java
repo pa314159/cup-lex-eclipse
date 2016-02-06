@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public abstract class AbstractWidget
 extends Composite

@@ -36,7 +36,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class ClePlugin
 extends AbstractUIPlugin
@@ -46,7 +45,7 @@ extends AbstractUIPlugin
 	private static final Class		CLASS	= ClePlugin.class;
 
 	/**	 */
-	public static final String		ID		= "pi.eclipse.cle";	//$NON-NLS-1$
+	public static final String		ID		= "pi.eclipse.cle";	
 
 	/**	 */
 	private static ClePlugin		PLUGIN;
@@ -92,7 +91,7 @@ extends AbstractUIPlugin
 	 */
 	public static ImageDescriptor getImageDescriptor( String image )
 	{
-		return AbstractUIPlugin.imageDescriptorFromPlugin( ID, "/icons/" + image + ".gif" ); //$NON-NLS-1$ //$NON-NLS-2$
+		return AbstractUIPlugin.imageDescriptorFromPlugin( ID, "/icons/" + image + ".gif" ); 
 	}
 
 	/**
@@ -140,7 +139,7 @@ extends AbstractUIPlugin
 		IPath value = null;
 		final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final ContainerSelectionDialog dialog = new ContainerSelectionDialog( shell, root, true, CleStrings
-			.get( "select-folder" ) ); //$NON-NLS-1$
+			.get( "select-folder" ) ); 
 
 		if( dialog.open() == Window.OK ) {
 			final Object[] result = dialog.getResult();
@@ -304,7 +303,7 @@ extends AbstractUIPlugin
 	@Override
 	public void start( BundleContext context ) throws Exception
 	{
-		L.info( "starting plugin %s", ID ); //$NON-NLS-1$
+		L.info( "starting plugin %s", ID ); 
 
 		super.start( context );
 
@@ -316,9 +315,9 @@ extends AbstractUIPlugin
 
 		pathMan.getPathVariableNames();
 
-		L.info( "plugin %s initialized", ID ); //$NON-NLS-1$
+		L.info( "plugin %s initialized", ID ); 
 
-		this.LOG = Boolean.valueOf( Platform.getDebugOption( ID + "/LOG" ) ); //$NON-NLS-1$
+		this.LOG = Boolean.valueOf( Platform.getDebugOption( ID + "/LOG" ) ); 
 	}
 
 	/**
@@ -332,7 +331,7 @@ extends AbstractUIPlugin
 		ClePlugin.PLUGIN = null;
 		ClePlugin.CONTEXT = null;
 
-		L.debug( "stopped plugin %s", ID ); //$NON-NLS-1$
+		L.debug( "stopped plugin %s", ID ); 
 	}
 
 }

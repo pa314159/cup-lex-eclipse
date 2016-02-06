@@ -9,7 +9,6 @@ import org.eclipse.ui.editors.text.TextEditor;
 import pi.eclipse.cle.builders.CupLexNature;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class AbstractEditor
 extends TextEditor

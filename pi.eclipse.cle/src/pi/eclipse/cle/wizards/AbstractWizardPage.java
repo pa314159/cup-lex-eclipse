@@ -8,7 +8,6 @@ import pi.eclipse.cle.util.AbstractWidget;
 import pi.eclipse.cle.util.WidgetListener;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 abstract class AbstractWizardPage
 extends WizardPage

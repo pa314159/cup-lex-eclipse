@@ -16,7 +16,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>jflex</groupId>
+			<groupId>de.jflex</groupId>
 			<artifactId>jflex</artifactId>
 		</dependency>
 		<dependency>

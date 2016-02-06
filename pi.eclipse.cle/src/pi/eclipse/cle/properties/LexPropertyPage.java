@@ -14,7 +14,6 @@ import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.WidgetListener;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexPropertyPage
 extends PropertyPage
@@ -69,7 +68,7 @@ implements WidgetListener
 
 		final Label label = new Label( parent, SWT.NONE );
 
-		label.setText( CleStrings.get( "java-nature-required" ) ); //$NON-NLS-1$
+		label.setText( CleStrings.get( "java-nature-required" ) ); 
 
 		return label;
 	}

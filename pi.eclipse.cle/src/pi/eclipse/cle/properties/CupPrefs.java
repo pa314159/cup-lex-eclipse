@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupPrefs
 extends AbstractPref
@@ -60,7 +59,7 @@ extends AbstractPref
 	 */
 	public String getDefaultParserClass()
 	{
-		return getJavaName() + "Cup"; //$NON-NLS-1$
+		return getJavaName() + "Cup"; 
 	}
 
 	/**
@@ -68,7 +67,7 @@ extends AbstractPref
 	 */
 	public String getDefaultSymbolsClass()
 	{
-		return getJavaName() + "Sym"; //$NON-NLS-1$
+		return getJavaName() + "Sym"; 
 	}
 
 	public int getExpectedConflicts()

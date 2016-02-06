@@ -13,7 +13,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 /**
  * Class used to initialize default preference values.
  * 
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class PreferenceInitializer
 extends AbstractPreferenceInitializer
@@ -28,8 +27,8 @@ extends AbstractPreferenceInitializer
 		final IPreferenceStore store = JavaPlugin.getDefault().getPreferenceStore();
 
 		if( store.getBoolean( PreferenceConstants.SRCBIN_FOLDERS_IN_NEWPROJ ) ) {
-			LEX_OUTPUT.setDefault( "" ); //$NON-NLS-1$
-			CUP_OUTPUT.setDefault( "" ); //$NON-NLS-1$
+			LEX_OUTPUT.setDefault( "" ); 
+			CUP_OUTPUT.setDefault( "" ); 
 		}
 		else {
 			final String src = store.getString( PreferenceConstants.SRCBIN_SRCNAME );

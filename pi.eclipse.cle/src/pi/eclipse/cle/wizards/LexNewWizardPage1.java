@@ -4,7 +4,6 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class LexNewWizardPage1
 extends AbstractWizardPage
@@ -12,7 +11,7 @@ extends AbstractWizardPage
 
 	LexNewWizardPage1( IContainer container )
 	{
-		super( container, "page-1" ); //$NON-NLS-1$
+		super( container, "page-1" ); 
 	}
 
 	/**

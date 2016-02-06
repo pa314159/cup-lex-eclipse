@@ -3,7 +3,6 @@ package pi.eclipse.cle;
 import java.util.logging.Logger;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CleLog
 {

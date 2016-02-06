@@ -20,13 +20,12 @@ import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.properties.CupPrefs;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupBuilder
 extends AbstractBuilder
 {
 
-	public static final String	ID	= ClePlugin.ID + "." + "CupBuilder";	//$NON-NLS-1$ //$NON-NLS-2$
+	public static final String	ID	= ClePlugin.ID + "." + "CupBuilder";	
 
 	public CupBuilder()
 	{
@@ -113,14 +112,14 @@ extends AbstractBuilder
 			fDest = new File( fDest, packageName.replace( '.', File.separatorChar ) );
 		}
 
-		args.append( " -parser" ); //$NON-NLS-1$
-		args.append( " " + pref.getParserClass() ); //$NON-NLS-1$
+		args.append( " -parser" ); 
+		args.append( " " + pref.getParserClass() ); 
 
-		args.append( " -symbols" ); //$NON-NLS-1$
-		args.append( " " + pref.getSymbolsClass() ); //$NON-NLS-1$
+		args.append( " -symbols" ); 
+		args.append( " " + pref.getSymbolsClass() ); 
 
-		args.append( " -destdir" ); //$NON-NLS-1$
-		args.append( " \"" + fDest.getAbsolutePath() + "\"" ); //$NON-NLS-1$ //$NON-NLS-2$
+		args.append( " -destdir" ); 
+		args.append( " \"" + fDest.getAbsolutePath() + "\"" ); 
 
 		final int ec = pref.getExpectedConflicts();
 
@@ -129,38 +128,38 @@ extends AbstractBuilder
 			args.append( ec );
 		}
 		if( pref.getSymbolsIf() ) {
-			args.append( " -interface" ); //$NON-NLS-1$
+			args.append( " -interface" ); 
 		}
 		if( pref.getNonTerms() ) {
-			args.append( " -nonterms" ); //$NON-NLS-1$
+			args.append( " -nonterms" ); 
 		}
 		if( pref.getCompactRed() ) {
-			args.append( " -compact_red" ); //$NON-NLS-1$
+			args.append( " -compact_red" ); 
 		}
 		if( pref.getNoPositions() ) {
-			args.append( " -nopositions" ); //$NON-NLS-1$
+			args.append( " -nopositions" ); 
 		}
 		if( pref.getNoScanner() ) {
-			args.append( " -noscanner" ); //$NON-NLS-1$
+			args.append( " -noscanner" ); 
 		}
 		if( CUP_DEBUG.getBoolean() ) {
-			args.append( " -debug" ); //$NON-NLS-1$
+			args.append( " -debug" ); 
 		}
 		if( CUP_DUMP_ALL.getBoolean() ) {
-			args.append( " -dump" ); //$NON-NLS-1$
+			args.append( " -dump" ); 
 		}
 		else {
 			if( CUP_DUMP_GRAMMAR.getBoolean() ) {
-				args.append( " -dump_grammar" ); //$NON-NLS-1$
+				args.append( " -dump_grammar" ); 
 			}
 			if( CUP_DUMP_STATES.getBoolean() ) {
-				args.append( " -dump_states" ); //$NON-NLS-1$
+				args.append( " -dump_states" ); 
 			}
 			if( CUP_DUMP_TABLES.getBoolean() ) {
-				args.append( " -dump_tables" ); //$NON-NLS-1$
+				args.append( " -dump_tables" ); 
 			}
 		}
-		args.append( " \"" + iFile.getAbsolutePath() + "\"" ); //$NON-NLS-1$ //$NON-NLS-2$
+		args.append( " \"" + iFile.getAbsolutePath() + "\"" ); 
 
 		fDest.mkdirs();
 

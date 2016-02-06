@@ -8,7 +8,6 @@ import org.eclipse.debug.core.model.IStreamMonitor;
 import pi.eclipse.cle.properties.AbstractPref;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 final class JavaProcessData
 implements IStreamListener

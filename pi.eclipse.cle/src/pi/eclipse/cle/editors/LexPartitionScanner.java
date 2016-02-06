@@ -10,7 +10,6 @@ import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.Token;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class LexPartitionScanner
 extends RuleBasedPartitionScanner
@@ -30,7 +29,7 @@ extends RuleBasedPartitionScanner
 
 	static final LexPartitionScanner	INSTANCE			= new LexPartitionScanner();
 
-	static final String					LEX_PARTITIONING	= "__lex_partitioning";		//$NON-NLS-1$
+	static final String					LEX_PARTITIONING	= "__lex_partitioning";		
 
 	static {
 		final List<String> types = new ArrayList<String>();
@@ -47,7 +46,7 @@ extends RuleBasedPartitionScanner
 	{
 		final List<IPredicateRule> rules = new ArrayList();
 
-		rules.add( new EndOfLineRule( "//", Token.UNDEFINED ) ); //$NON-NLS-1$
+		rules.add( new EndOfLineRule( "//", Token.UNDEFINED ) ); 
 		rules.add( createOptionRule() );
 
 		setPredicateRules( rules.toArray( new IPredicateRule[0] ) );
@@ -58,7 +57,7 @@ extends RuleBasedPartitionScanner
 	 */
 	private IPredicateRule createOptionRule()
 	{
-		final EndOfLineRule rule = new EndOfLineRule( "%", TYPES.__lex_option.token ); //$NON-NLS-1$
+		final EndOfLineRule rule = new EndOfLineRule( "%", TYPES.__lex_option.token ); 
 
 		rule.setColumnConstraint( 0 );
 

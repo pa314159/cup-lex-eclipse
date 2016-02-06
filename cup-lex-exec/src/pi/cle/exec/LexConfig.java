@@ -1,15 +1,17 @@
+
 package pi.cle.exec;
 
 import java.io.File;
 
 import org.apache.tools.ant.Target;
 
-import JFlex.anttask.JFlexTask;
+import jflex.anttask.JFlexTask;
 
 public class LexConfig
 extends AbstractConfig
 {
-	private final JFlexTask	task	= new JFlexTask();
+
+	private final JFlexTask task = new JFlexTask();
 
 	public LexConfig()
 	{
@@ -80,12 +82,12 @@ extends AbstractConfig
 
 	public void setSwitch( boolean b )
 	{
-		this.task.setSwitch( b );
+		System.err.println( "Property 'switch' is not supported anymore" );
 	}
 
 	public void setTable( boolean b )
 	{
-		this.task.setTable( b );
+		System.err.println( "Property 'table' is not supported anymore" );
 	}
 
 	public void setTime( boolean displayTime )
@@ -101,6 +103,21 @@ extends AbstractConfig
 	public void setVerbose( boolean verbose )
 	{
 		this.task.setVerbose( verbose );
+	}
+
+	public void setUnusedWarning( boolean warn )
+	{
+		this.task.setUnusedWarning( warn );
+	}
+
+	public void setLegacyDot( boolean b )
+	{
+		this.task.setLegacyDot( b );
+	}
+
+	public void setInputStreamCtor( boolean b )
+	{
+		this.task.setInputStreamCtor( b );
 	}
 
 }

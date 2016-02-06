@@ -19,7 +19,6 @@ import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.CleStrings;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexPreferencePage
 extends FieldEditorPreferencePage
@@ -52,11 +51,11 @@ implements IWorkbenchPreferencePage
 		final Composite fep = getFieldEditorParent();
 		final String[][] val = new String[][] {
 		//
-			{ CleStrings.get( "preference-lex-pack" ), "preference-lex-pack" }, //$NON-NLS-1$ //$NON-NLS-2$
+			{ CleStrings.get( "preference-lex-pack" ), "preference-lex-pack" }, 
 			//
-			{ CleStrings.get( "preference-lex-table" ), "preference-lex-table" }, //$NON-NLS-1$ //$NON-NLS-2$
+			{ CleStrings.get( "preference-lex-table" ), "preference-lex-table" }, 
 			//
-			{ CleStrings.get( "preference-lex-switch" ), "preference-lex-switch" }, //$NON-NLS-1$ //$NON-NLS-2$
+			{ CleStrings.get( "preference-lex-switch" ), "preference-lex-switch" }, 
 		//
 		};
 

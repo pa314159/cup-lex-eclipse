@@ -9,7 +9,6 @@ import pi.eclipse.cle.properties.LexPrefs;
 import pi.eclipse.cle.properties.LexPrefsWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class LexNewWizardPage2
 extends AbstractWizardPage
@@ -20,7 +19,7 @@ extends AbstractWizardPage
 	 */
 	public LexNewWizardPage2( IContainer container )
 	{
-		super( container, "page-2" ); //$NON-NLS-1$
+		super( container, "page-2" ); 
 
 		setPageComplete( false );
 	}

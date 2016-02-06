@@ -31,7 +31,6 @@ import org.eclipse.ui.ide.IDE;
 import pi.eclipse.cle.CleStrings;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 abstract class AbstractWizard
 extends Wizard
@@ -112,7 +111,7 @@ implements INewWizard
 		catch( final InvocationTargetException e ) {
 			final Throwable realException = e.getTargetException();
 
-			MessageDialog.openError( getShell(), CleStrings.get( "error-title" ), realException.getMessage() ); //$NON-NLS-1$
+			MessageDialog.openError( getShell(), CleStrings.get( "error-title" ), realException.getMessage() ); 
 
 			return false;
 		}
@@ -131,7 +130,7 @@ implements INewWizard
 	private InputStream openContentStream( VelocityContext context )
 	throws ResourceNotFoundException, ParseErrorException, Exception
 	{
-		final FileGen velocity = new FileGen( getFileExtension() + ".template" ); //$NON-NLS-1$
+		final FileGen velocity = new FileGen( getFileExtension() + ".template" ); 
 		final StringWriter output = new StringWriter();
 
 		velocity.generate( context, output );
@@ -148,7 +147,7 @@ implements INewWizard
 	 */
 	protected void doFinish( final IFile file, VelocityContext context, IProgressMonitor monitor ) throws CoreException
 	{
-		monitor.beginTask( CleStrings.get( "creating-file", file ), 2 ); //$NON-NLS-1$
+		monitor.beginTask( CleStrings.get( "creating-file", file ), 2 ); 
 
 		try {
 			final InputStream stream = openContentStream( context );
@@ -168,7 +167,7 @@ implements INewWizard
 
 		monitor.worked( 1 );
 
-		monitor.setTaskName( CleStrings.get( "opening-file", file ) ); //$NON-NLS-1$
+		monitor.setTaskName( CleStrings.get( "opening-file", file ) ); 
 
 		getShell().getDisplay().asyncExec( new Runnable()
 			{
@@ -212,6 +211,6 @@ implements INewWizard
 	 */
 	final IPath getFilePath()
 	{
-		return new Path( getFileName() + "." + getFileExtension() ); //$NON-NLS-1$
+		return new Path( getFileName() + "." + getFileExtension() ); 
 	}
 }

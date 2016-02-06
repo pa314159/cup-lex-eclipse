@@ -11,16 +11,15 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CleVariablesInitializer
 extends ClasspathVariableInitializer
 {
 	public enum VARS
 	{
-		CUP_RUNTIME_JAR( "java-cup-0.11a-beta-20060608-runtime" ), //$NON-NLS-1$
-		CUP_JAR( "java-cup-0.11a-beta-20060608" ), //$NON-NLS-1$
-		LEX_JAR( "jflex-1.4.3" ), //$NON-NLS-1$
+		CUP_RUNTIME_JAR( "java-cup-0.11a-beta-20060608-runtime" ), 
+		CUP_JAR( "java-cup-0.11a-beta-20060608" ), 
+		LEX_JAR( "jflex-1.4.3" ), 
 		;
 
 		public final Path	path	= new Path( name() );

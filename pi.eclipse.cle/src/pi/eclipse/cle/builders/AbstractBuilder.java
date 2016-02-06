@@ -53,7 +53,6 @@ import pi.eclipse.cle.CleVariablesInitializer.VARS;
 import pi.eclipse.cle.properties.AbstractPref;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 abstract class AbstractBuilder
 extends IncrementalProjectBuilder
@@ -61,7 +60,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 {
 
 	/**
-	 * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
 	 */
 	final class FullBuildVisitor
 	implements IResourceVisitor
@@ -88,7 +86,6 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	}
 
 	/**
-	 * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
 	 */
 	final class FullCleanVisitor
 	implements IResourceVisitor
@@ -326,7 +323,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 			}
 
 			if( result[0] == null ) {
-				int index = line.indexOf( "package" ); //$NON-NLS-1$
+				int index = line.indexOf( "package" ); 
 				if( index >= 0 ) {
 					index += 7;
 
@@ -339,7 +336,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 			}
 
 			if( result[1] == null ) {
-				int index = line.indexOf( "%class" ); //$NON-NLS-1$
+				int index = line.indexOf( "%class" ); 
 				if( index >= 0 ) {
 					index += 6;
 
@@ -357,7 +354,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 	 */
 	protected String markerType()
 	{
-		return ClePlugin.ID + "." + getClass().getSimpleName(); //$NON-NLS-1$
+		return ClePlugin.ID + "." + getClass().getSimpleName(); 
 	}
 
 	/**
@@ -374,7 +371,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 	void buildResource( IProgressMonitor progressMonitor, IResource resource )
 	{
-		this.L.debug( "BUILDING %s", resource.getFullPath() ); //$NON-NLS-1$
+		this.L.debug( "BUILDING %s", resource.getFullPath() ); 
 
 		try {
 			createJavaSource( progressMonitor, resource );
@@ -386,7 +383,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 	void cleanResource( IProgressMonitor progressMonitor, IResource resource )
 	{
-		this.L.debug( "CLEANING %s", resource.getFullPath() ); //$NON-NLS-1$
+		this.L.debug( "CLEANING %s", resource.getFullPath() ); 
 
 		try {
 			resource.deleteMarkers( markerType(), true, IResource.DEPTH_INFINITE );
@@ -468,7 +465,7 @@ implements IJavaLaunchConfigurationConstants, IDebugEventSetListener
 
 		this.processData.put( lwn, rpd );
 
-		this.L.debug( "LAUNCH %s %s", className, arguments ); //$NON-NLS-1$
+		this.L.debug( "LAUNCH %s %s", className, arguments ); 
 
 		try {
 			final ILaunch lan = lwc.launch( ILaunchManager.RUN_MODE, progressMonitor );

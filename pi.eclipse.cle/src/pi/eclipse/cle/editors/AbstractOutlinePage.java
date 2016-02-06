@@ -19,7 +19,6 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 abstract class AbstractOutlinePage
 extends ContentOutlinePage
@@ -144,7 +143,7 @@ extends ContentOutlinePage
 		}
 	}
 
-	protected final static String	SEGMENTS	= "__cle_segments"; //$NON-NLS-1$
+	protected final static String	SEGMENTS	= "__cle_segments"; 
 
 	private final IDocumentProvider	documentProvider;
 
@@ -199,7 +198,7 @@ extends ContentOutlinePage
 				final Position p = new Position( offset, length );
 				document.addPosition( SEGMENTS, p );
 
-				content.add( new Segment( "offset", p ) ); //$NON-NLS-1$
+				content.add( new Segment( "offset", p ) ); 
 
 			}
 			catch( final BadPositionCategoryException x ) {

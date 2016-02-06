@@ -30,7 +30,6 @@ import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.AbstractWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupPrefsWidget
 extends AbstractWidget
@@ -168,19 +167,19 @@ extends AbstractWidget
 	{
 		if( isOutputVisible()
 			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-output-error" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "preference-cup-output-error" ) ); 
 
 			return;
 		}
 
 		if( this.txCupClass.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-parser-error" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "preference-cup-parser-error" ) ); 
 
 			return;
 		}
 
 		if( this.txSymClass.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "preference-cup-symbol-error" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "preference-cup-symbol-error" ) ); 
 
 			return;
 		}
@@ -234,7 +233,7 @@ extends AbstractWidget
 				}
 			} );
 		this.btJavaFolder = new Button( this, SWT.NONE );
-		this.btJavaFolder.setText( "..." ); //$NON-NLS-1$
+		this.btJavaFolder.setText( "..." ); 
 		this.btJavaFolder.addSelectionListener( new SelectionAdapter()
 			{
 				@Override
@@ -251,7 +250,7 @@ extends AbstractWidget
 		gdParserClass.verticalAlignment = GridData.CENTER;
 
 		this.lxCupClass = new Label( this, SWT.NONE );
-		this.lxCupClass.setText( CleStrings.get( "preference-cup-parser-class" ) ); //$NON-NLS-1$
+		this.lxCupClass.setText( CleStrings.get( "preference-cup-parser-class" ) ); 
 		this.txCupClass = new Text( this, SWT.BORDER );
 		this.txCupClass.setLayoutData( gdParserClass );
 		this.txCupClass.addModifyListener( new ModifyListener()
@@ -270,7 +269,7 @@ extends AbstractWidget
 		gdSymClass.verticalAlignment = GridData.CENTER;
 
 		this.lxSymClass = new Label( this, SWT.NONE );
-		this.lxSymClass.setText( CleStrings.get( "preference-cup-symbols-class" ) ); //$NON-NLS-1$
+		this.lxSymClass.setText( CleStrings.get( "preference-cup-symbols-class" ) ); 
 		this.txSymClass = new Text( this, SWT.BORDER );
 		this.txSymClass.setLayoutData( gdSymClass );
 		this.txSymClass.addModifyListener( new ModifyListener()
@@ -394,7 +393,7 @@ extends AbstractWidget
 			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
 		}
 		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+			this.txJavaFolder.setText( "" ); 
 		}
 	}
 
@@ -416,7 +415,7 @@ extends AbstractWidget
 			this.ckNoScanner.setSelection( CUP_NO_SCANNER.getDefaultBoolean() );
 		}
 		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+			this.txJavaFolder.setText( "" ); 
 		}
 	}
 

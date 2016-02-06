@@ -17,7 +17,6 @@ import pi.eclipse.cle.builders.CupLexNature;
 import pi.eclipse.cle.preferences.ClePreferences;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public abstract class AbstractPref
 {
@@ -146,7 +145,7 @@ public abstract class AbstractPref
 	 */
 	protected boolean getBooleanPref( ClePreferences e )
 	{
-		return this.preferences.getBoolean( this.resource + "/" + e.toString(), e.getDefaultBoolean() ); //$NON-NLS-1$
+		return this.preferences.getBoolean( this.resource + "/" + e.toString(), e.getDefaultBoolean() ); 
 	}
 
 	/**
@@ -155,7 +154,7 @@ public abstract class AbstractPref
 	 */
 	protected int getIntPref( ClePreferences e )
 	{
-		return this.preferences.getInt( this.resource + "/" + e, e.getDefaultInt() ); //$NON-NLS-1$
+		return this.preferences.getInt( this.resource + "/" + e, e.getDefaultInt() ); 
 	}
 
 	/**
@@ -165,7 +164,7 @@ public abstract class AbstractPref
 	 */
 	protected String getStringPref( ClePreferences e )
 	{
-		return this.preferences.get( this.resource + "/" + e, e.getDefaultString() ); //$NON-NLS-1$
+		return this.preferences.get( this.resource + "/" + e, e.getDefaultString() ); 
 	}
 
 	/**
@@ -175,7 +174,7 @@ public abstract class AbstractPref
 	 */
 	protected String getStringPref( ClePreferences e, String v )
 	{
-		return this.preferences.get( this.resource + "/" + e, v ); //$NON-NLS-1$
+		return this.preferences.get( this.resource + "/" + e, v ); 
 	}
 
 	/**
@@ -184,7 +183,7 @@ public abstract class AbstractPref
 	 */
 	protected void setPref( ClePreferences e, boolean v )
 	{
-		this.preferences.putBoolean( this.resource + "/" + e, v ); //$NON-NLS-1$
+		this.preferences.putBoolean( this.resource + "/" + e, v ); 
 	}
 
 	/**
@@ -193,7 +192,7 @@ public abstract class AbstractPref
 	 */
 	protected void setPref( ClePreferences e, int v )
 	{
-		this.preferences.putInt( this.resource + "/" + e, v ); //$NON-NLS-1$
+		this.preferences.putInt( this.resource + "/" + e, v ); 
 	}
 
 	/**
@@ -202,6 +201,6 @@ public abstract class AbstractPref
 	 */
 	protected void setPref( ClePreferences e, String v )
 	{
-		this.preferences.put( this.resource + "/" + e, v ); //$NON-NLS-1$
+		this.preferences.put( this.resource + "/" + e, v ); 
 	}
 }

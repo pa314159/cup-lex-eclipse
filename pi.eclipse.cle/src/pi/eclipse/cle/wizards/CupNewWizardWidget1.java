@@ -30,7 +30,6 @@ import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.AbstractWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class CupNewWizardWidget1
 extends AbstractWidget
@@ -115,7 +114,7 @@ extends AbstractWidget
 	public void updateWidgetContainer()
 	{
 		if( this.txFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); 
 
 			return;
 		}
@@ -123,28 +122,28 @@ extends AbstractWidget
 		final String fileName = this.txFileName.getText();
 
 		if( fileName.length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "file-name-required" ) ); 
 
 			return;
 		}
 
-		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".cup" ) ) { //$NON-NLS-1$
-			fireWidgetModified( CleStrings.get( "cup-ext-required" ) ); //$NON-NLS-1$
+		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".cup" ) ) { 
+			fireWidgetModified( CleStrings.get( "cup-ext-required" ) ); 
 
 			return;
 		}
 
 		final IContainer folder = getFolder();
-		final IResource resource = folder != null ? folder.findMember( getFileName() + ".cup" ) : null; //$NON-NLS-1$
+		final IResource resource = folder != null ? folder.findMember( getFileName() + ".cup" ) : null; 
 
 		if( (resource != null) && resource.exists() ) {
-			fireWidgetModified( CleStrings.get( "resource-exists", getFileName() ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "resource-exists", getFileName() ) ); 
 
 			return;
 		}
 
 		if( this.txJavaFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); 
 
 			return;
 		}
@@ -172,7 +171,7 @@ extends AbstractWidget
 		gdFolder.verticalAlignment = GridData.CENTER;
 
 		this.lxFolder = new Label( this, SWT.NONE );
-		this.lxFolder.setText( CleStrings.get( "source-folder" ) ); //$NON-NLS-1$
+		this.lxFolder.setText( CleStrings.get( "source-folder" ) ); 
 
 		this.txFolder = new Text( this, SWT.BORDER );
 		this.txFolder.setLayoutData( gdFolder );
@@ -185,7 +184,7 @@ extends AbstractWidget
 			} );
 
 		this.btFolder = new Button( this, SWT.NONE );
-		this.btFolder.setText( "..." ); //$NON-NLS-1$
+		this.btFolder.setText( "..." ); 
 		this.btFolder.addSelectionListener( new org.eclipse.swt.events.SelectionAdapter()
 			{
 				@Override
@@ -203,7 +202,7 @@ extends AbstractWidget
 
 		this.lxFileName = new Label( this, SWT.NONE );
 
-		this.lxFileName.setText( CleStrings.get( "file-name" ) ); //$NON-NLS-1$
+		this.lxFileName.setText( CleStrings.get( "file-name" ) ); 
 
 		this.txFileName = new Text( this, SWT.BORDER );
 
@@ -221,7 +220,7 @@ extends AbstractWidget
 
 		this.lxJavaFolder = new Label( this, SWT.NONE );
 
-		this.lxJavaFolder.setText( CleStrings.get( "java-folder" ) ); //$NON-NLS-1$
+		this.lxJavaFolder.setText( CleStrings.get( "java-folder" ) ); 
 
 		this.txJavaFolder = new Text( this, SWT.BORDER );
 
@@ -236,7 +235,7 @@ extends AbstractWidget
 
 		this.btJavaFolder = new Button( this, SWT.NONE );
 
-		this.btJavaFolder.setText( "..." ); //$NON-NLS-1$
+		this.btJavaFolder.setText( "..." ); 
 		this.btJavaFolder.addSelectionListener( new SelectionAdapter()
 			{
 				@Override
@@ -256,7 +255,7 @@ extends AbstractWidget
 
 		this.lxPackage = new Label( this, SWT.NONE );
 
-		this.lxPackage.setText( CleStrings.get( "package-name" ) ); //$NON-NLS-1$
+		this.lxPackage.setText( CleStrings.get( "package-name" ) ); 
 
 		this.txPackage = new Text( this, SWT.BORDER );
 
@@ -264,7 +263,7 @@ extends AbstractWidget
 
 		this.btPackage = new Button( this, SWT.NONE );
 
-		this.btPackage.setText( "..." ); //$NON-NLS-1$
+		this.btPackage.setText( "..." ); 
 
 		this.btPackage.addSelectionListener( new org.eclipse.swt.events.SelectionAdapter()
 			{
@@ -289,7 +288,7 @@ extends AbstractWidget
 			this.txFolder.setText( value.toPortableString() );
 		}
 		else {
-			this.txFolder.setText( "" ); //$NON-NLS-1$
+			this.txFolder.setText( "" ); 
 		}
 	}
 
@@ -308,7 +307,7 @@ extends AbstractWidget
 			}
 		}
 
-		this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+		this.txJavaFolder.setText( "" ); 
 	}
 
 	/**
@@ -326,7 +325,7 @@ extends AbstractWidget
 			}
 		}
 
-		this.txPackage.setText( "" ); //$NON-NLS-1$
+		this.txPackage.setText( "" ); 
 	}
 
 	/**
@@ -381,7 +380,7 @@ extends AbstractWidget
 		this.txJavaFolder.setEnabled( this.resFolder != null );
 		this.btJavaFolder.setEnabled( this.resFolder != null );
 
-		this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+		this.txJavaFolder.setText( "" ); 
 	}
 
 	/**
@@ -389,7 +388,7 @@ extends AbstractWidget
 	 */
 	String getFileName()
 	{
-		return this.txFileName.getText().replaceAll( "\\.cup$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+		return this.txFileName.getText().replaceAll( "\\.cup$", "" ); 
 	}
 
 	/**

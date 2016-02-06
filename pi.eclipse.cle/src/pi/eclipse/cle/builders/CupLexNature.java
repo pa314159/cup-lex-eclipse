@@ -10,12 +10,11 @@ import org.eclipse.core.runtime.CoreException;
 import pi.eclipse.cle.ClePlugin;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupLexNature
 implements IProjectNature
 {
-	public static final String	ID	= ClePlugin.ID + "." + "CupLexNature";	//$NON-NLS-1$ //$NON-NLS-2$
+	public static final String	ID	= ClePlugin.ID + "." + "CupLexNature";	
 
 	/**
 	 * Toggles sample nature on a project

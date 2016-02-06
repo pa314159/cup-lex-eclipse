@@ -5,12 +5,11 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import pi.eclipse.cle.ClePlugin;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexEditor
 extends AbstractEditor
 {
-	public static final String	ID	= ClePlugin.ID + "." + "LexEditor"; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String	ID	= ClePlugin.ID + "." + "LexEditor"; 
 
 	private AbstractOutlinePage	outlinePage;
 

@@ -4,7 +4,6 @@ import org.apache.velocity.VelocityContext;
 import org.eclipse.core.resources.IContainer;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexNewWizard
 extends AbstractWizard
@@ -35,20 +34,20 @@ extends AbstractWizard
 	{
 		final LexNewWizardWidget1 widget = this.page1.getControl();
 
-		context.put( "PACKAGE", widget.txPackage.getText() ); //$NON-NLS-1$
-		context.put( "CLASS", widget.txJavaName.getText() ); //$NON-NLS-1$
+		context.put( "PACKAGE", widget.txPackage.getText() ); 
+		context.put( "CLASS", widget.txJavaName.getText() ); 
 
-		context.put( "UNICODE", widget.ckUnicode.getSelection() ); //$NON-NLS-1$
-		context.put( "LINE", widget.ckLines.getSelection() ); //$NON-NLS-1$
-		context.put( "COLUMN", widget.ckColumns.getSelection() ); //$NON-NLS-1$
+		context.put( "UNICODE", widget.ckUnicode.getSelection() ); 
+		context.put( "LINE", widget.ckLines.getSelection() ); 
+		context.put( "COLUMN", widget.ckColumns.getSelection() ); 
 
-		context.put( "PUBLIC", widget.ckPublic.getSelection() ); //$NON-NLS-1$
-		context.put( "ABSTRACT", widget.ckAbstract.getSelection() ); //$NON-NLS-1$
-		context.put( "FINAL", widget.ckFinal.getSelection() ); //$NON-NLS-1$
+		context.put( "PUBLIC", widget.ckPublic.getSelection() ); 
+		context.put( "ABSTRACT", widget.ckAbstract.getSelection() ); 
+		context.put( "FINAL", widget.ckFinal.getSelection() ); 
 
-		context.put( "CUP", widget.ckCup.getSelection() ); //$NON-NLS-1$
-		context.put( "SYM_CLASS", widget.txSym.getText() ); //$NON-NLS-1$
-		context.put( "CUP_DEBUG", widget.ckCupDebug.getSelection() ); //$NON-NLS-1$
+		context.put( "CUP", widget.ckCup.getSelection() ); 
+		context.put( "SYM_CLASS", widget.txSym.getText() ); 
+		context.put( "CUP_DEBUG", widget.ckCupDebug.getSelection() ); 
 	}
 
 	/**
@@ -66,7 +65,7 @@ extends AbstractWizard
 	@Override
 	String getFileExtension()
 	{
-		return "lex"; //$NON-NLS-1$
+		return "lex"; 
 	}
 
 	/**

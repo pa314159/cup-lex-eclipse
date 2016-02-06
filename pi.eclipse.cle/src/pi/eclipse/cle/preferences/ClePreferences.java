@@ -8,7 +8,6 @@ import pi.eclipse.cle.CleStrings;
 /**
  * Constant definitions for plug-in preferences.
  * 
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public enum ClePreferences
 {
@@ -99,7 +98,7 @@ public enum ClePreferences
 
 		this.string = x;
 
-		this.label = "preference-" + x; //$NON-NLS-1$
+		this.label = "preference-" + x; 
 	}
 
 	/**

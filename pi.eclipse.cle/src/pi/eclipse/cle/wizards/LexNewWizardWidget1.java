@@ -30,7 +30,6 @@ import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.AbstractWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class LexNewWizardWidget1
 extends AbstractWidget
@@ -140,7 +139,7 @@ extends AbstractWidget
 	public void updateWidgetContainer()
 	{
 		if( this.txFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "folder-name-required" ) ); 
 
 			return;
 		}
@@ -148,38 +147,38 @@ extends AbstractWidget
 		final String fileName = this.txFileName.getText();
 
 		if( fileName.length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "file-name-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "file-name-required" ) ); 
 
 			return;
 		}
 
-		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".lex" ) ) { //$NON-NLS-1$
-			fireWidgetModified( CleStrings.get( "lex-ext-required" ) ); //$NON-NLS-1$
+		if( (fileName.lastIndexOf( '.' ) >= 0) && !fileName.endsWith( ".lex" ) ) { 
+			fireWidgetModified( CleStrings.get( "lex-ext-required" ) ); 
 
 			return;
 		}
 
 		final IContainer folder = getFolder();
-		final IResource resource = folder != null ? folder.findMember( getFileName() + ".lex" ) : null; //$NON-NLS-1$
+		final IResource resource = folder != null ? folder.findMember( getFileName() + ".lex" ) : null; 
 
 		if( (resource != null) && resource.exists() ) {
-			fireWidgetModified( CleStrings.get( "resource-already-exists", getFileName() ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "resource-already-exists", getFileName() ) ); 
 
 			return;
 		}
 
 		if( this.txJavaName.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "class-name-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "class-name-required" ) ); 
 
 			return;
 		}
 		if( this.txJavaFolder.getText().length() == 0 ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); 
 
 			return;
 		}
 		if( this.ckCup.getSelection() && (this.txSym.getText().length() == 0) ) {
-			fireWidgetModified( CleStrings.get( "symbols-class-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "symbols-class-required" ) ); 
 
 			return;
 		}
@@ -201,7 +200,7 @@ extends AbstractWidget
 		gdFolder.verticalAlignment = GridData.CENTER;
 
 		this.lxFolder = new Label( this, SWT.NONE );
-		this.lxFolder.setText( CleStrings.get( "source-folder" ) ); //$NON-NLS-1$
+		this.lxFolder.setText( CleStrings.get( "source-folder" ) ); 
 
 		this.txFolder = new Text( this, SWT.BORDER );
 		this.txFolder.setLayoutData( gdFolder );
@@ -214,7 +213,7 @@ extends AbstractWidget
 			} );
 
 		this.btFolder = new Button( this, SWT.NONE );
-		this.btFolder.setText( "..." ); //$NON-NLS-1$
+		this.btFolder.setText( "..." ); 
 		this.btFolder.addSelectionListener( new org.eclipse.swt.events.SelectionAdapter()
 			{
 				@Override
@@ -232,7 +231,7 @@ extends AbstractWidget
 
 		this.lxFileName = new Label( this, SWT.NONE );
 
-		this.lxFileName.setText( CleStrings.get( "file-name" ) ); //$NON-NLS-1$
+		this.lxFileName.setText( CleStrings.get( "file-name" ) ); 
 
 		this.txFileName = new Text( this, SWT.BORDER );
 
@@ -256,7 +255,7 @@ extends AbstractWidget
 
 		this.lxJavaFolder = new Label( this, SWT.NONE );
 
-		this.lxJavaFolder.setText( CleStrings.get( "java-folder" ) ); //$NON-NLS-1$
+		this.lxJavaFolder.setText( CleStrings.get( "java-folder" ) ); 
 
 		this.txJavaFolder = new Text( this, SWT.BORDER );
 
@@ -271,7 +270,7 @@ extends AbstractWidget
 
 		this.btJavaFolder = new Button( this, SWT.NONE );
 
-		this.btJavaFolder.setText( "..." ); //$NON-NLS-1$
+		this.btJavaFolder.setText( "..." ); 
 		this.btJavaFolder.addSelectionListener( new SelectionAdapter()
 			{
 				@Override
@@ -291,7 +290,7 @@ extends AbstractWidget
 
 		this.lxPackage = new Label( this, SWT.NONE );
 
-		this.lxPackage.setText( CleStrings.get( "package-name" ) ); //$NON-NLS-1$
+		this.lxPackage.setText( CleStrings.get( "package-name" ) ); 
 
 		this.txPackage = new Text( this, SWT.BORDER );
 
@@ -299,7 +298,7 @@ extends AbstractWidget
 
 		this.btPackage = new Button( this, SWT.NONE );
 
-		this.btPackage.setText( "..." ); //$NON-NLS-1$
+		this.btPackage.setText( "..." ); 
 
 		this.btPackage.addSelectionListener( new org.eclipse.swt.events.SelectionAdapter()
 			{
@@ -320,7 +319,7 @@ extends AbstractWidget
 
 		this.lxJavaName = new Label( this, SWT.NONE );
 
-		this.lxJavaName.setText( CleStrings.get( "class-name" ) ); //$NON-NLS-1$
+		this.lxJavaName.setText( CleStrings.get( "class-name" ) ); 
 
 		this.txJavaName = new Text( this, SWT.BORDER );
 
@@ -346,18 +345,18 @@ extends AbstractWidget
 
 		this.ckUnicode = new Button( this, SWT.CHECK );
 
-		this.ckUnicode.setText( CleStrings.get( "use-unicode" ) ); //$NON-NLS-1$
+		this.ckUnicode.setText( CleStrings.get( "use-unicode" ) ); 
 		this.ckUnicode.setSelection( true );
 		this.ckUnicode.setLayoutData( gdUnicode );
 
 		this.ckLines = new Button( this, SWT.CHECK );
 
-		this.ckLines.setText( CleStrings.get( "line-counting" ) ); //$NON-NLS-1$
+		this.ckLines.setText( CleStrings.get( "line-counting" ) ); 
 
 		this.ckLines.setSelection( true );
 		this.ckColumns = new Button( this, SWT.CHECK );
 
-		this.ckColumns.setText( CleStrings.get( "column-counting" ) ); //$NON-NLS-1$
+		this.ckColumns.setText( CleStrings.get( "column-counting" ) ); 
 		this.ckColumns.setSelection( true );
 		this.ckColumns.setLayoutData( gdColumns );
 
@@ -368,15 +367,15 @@ extends AbstractWidget
 
 		this.ckPublic = new Button( this, SWT.CHECK );
 
-		this.ckPublic.setText( CleStrings.get( "decl-public" ) ); //$NON-NLS-1$
+		this.ckPublic.setText( CleStrings.get( "decl-public" ) ); 
 
 		this.ckAbstract = new Button( this, SWT.RADIO );
 
-		this.ckAbstract.setText( CleStrings.get( "decl-abstract" ) ); //$NON-NLS-1$
+		this.ckAbstract.setText( CleStrings.get( "decl-abstract" ) ); 
 
 		this.ckFinal = new Button( this, SWT.RADIO );
 
-		this.ckFinal.setText( CleStrings.get( "decl-final" ) ); //$NON-NLS-1$
+		this.ckFinal.setText( CleStrings.get( "decl-final" ) ); 
 		this.ckFinal.setSelection( true );
 		this.ckFinal.setLayoutData( gdFinal );
 
@@ -387,7 +386,7 @@ extends AbstractWidget
 
 		this.ckCup = new Button( this, SWT.CHECK );
 
-		this.ckCup.setText( CleStrings.get( "cup-compat" ) ); //$NON-NLS-1$
+		this.ckCup.setText( CleStrings.get( "cup-compat" ) ); 
 		this.ckCup.setLayoutData( gdCup );
 		this.ckCup.setSelection( true );
 		this.ckCup.addSelectionListener( new org.eclipse.swt.events.SelectionAdapter()
@@ -414,7 +413,7 @@ extends AbstractWidget
 
 		this.lxSym = new Label( this, SWT.NONE );
 
-		this.lxSym.setText( CleStrings.get( "symbols-class-name" ) ); //$NON-NLS-1$
+		this.lxSym.setText( CleStrings.get( "symbols-class-name" ) ); 
 		this.lxSym.setLayoutData( gdLxSym );
 
 		this.txSym = new Text( this, SWT.BORDER );
@@ -430,7 +429,7 @@ extends AbstractWidget
 
 		this.ckCupDebug = new Button( this, SWT.CHECK );
 
-		this.ckCupDebug.setText( CleStrings.get( "cup-debug" ) ); //$NON-NLS-1$
+		this.ckCupDebug.setText( CleStrings.get( "cup-debug" ) ); 
 		this.ckCupDebug.setLayoutData( gdCupDebug );
 
 		setLayout( gridLayout ); // Generated
@@ -448,7 +447,7 @@ extends AbstractWidget
 			this.txFolder.setText( value.toPortableString() );
 		}
 		else {
-			this.txFolder.setText( "" ); //$NON-NLS-1$
+			this.txFolder.setText( "" ); 
 		}
 	}
 
@@ -467,7 +466,7 @@ extends AbstractWidget
 			}
 		}
 
-		this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+		this.txJavaFolder.setText( "" ); 
 	}
 
 	/**
@@ -485,7 +484,7 @@ extends AbstractWidget
 			}
 		}
 
-		this.txPackage.setText( "" ); //$NON-NLS-1$
+		this.txPackage.setText( "" ); 
 	}
 
 	/**
@@ -495,9 +494,9 @@ extends AbstractWidget
 	{
 		String fileName = this.txFileName.getText();
 
-		fileName = fileName.replaceAll( "\\.lex$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+		fileName = fileName.replaceAll( "\\.lex$", "" ); 
 
-		this.txJavaName.setText( ClePlugin.toJavaName( fileName, true ) + "Lex" ); //$NON-NLS-1$
+		this.txJavaName.setText( ClePlugin.toJavaName( fileName, true ) + "Lex" ); 
 	}
 
 	/**
@@ -552,7 +551,7 @@ extends AbstractWidget
 		this.txJavaFolder.setEnabled( this.resFolder != null );
 		this.btJavaFolder.setEnabled( this.resFolder != null );
 
-		this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+		this.txJavaFolder.setText( "" ); 
 	}
 
 	/**
@@ -562,9 +561,9 @@ extends AbstractWidget
 	{
 		String javaName = this.txJavaName.getText();
 
-		javaName = javaName.replaceAll( "Lex$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+		javaName = javaName.replaceAll( "Lex$", "" ); 
 
-		this.txSym.setText( javaName + "Sym" ); //$NON-NLS-1$
+		this.txSym.setText( javaName + "Sym" ); 
 	}
 
 	/**
@@ -572,7 +571,7 @@ extends AbstractWidget
 	 */
 	String getFileName()
 	{
-		return this.txFileName.getText().replaceAll( "\\.lex$", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+		return this.txFileName.getText().replaceAll( "\\.lex$", "" ); 
 	}
 
 	/**

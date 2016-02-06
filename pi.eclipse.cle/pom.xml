@@ -105,7 +105,6 @@
 		<dependency>
 			<groupId>java-cup</groupId>
 			<artifactId>java-cup</artifactId>
-			<version>0.11a-beta-20060608</version>
 			<classifier>runtime</classifier>
 		</dependency>
 		<dependency>

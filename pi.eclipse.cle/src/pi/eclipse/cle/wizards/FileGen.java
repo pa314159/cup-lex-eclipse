@@ -14,7 +14,6 @@ import org.apache.velocity.runtime.log.SimpleLog4JLogSystem;
 import pi.eclipse.cle.ClePlugin;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 class FileGen
 implements RuntimeConstants
@@ -24,10 +23,10 @@ implements RuntimeConstants
 
 	static {
 		try {
-			Velocity.setProperty( RESOURCE_LOADER, "custom" ); //$NON-NLS-1$
-			Velocity.setProperty( "custom.resource.loader.class", FileGenLoader.class.getName() ); //$NON-NLS-1$
+			Velocity.setProperty( RESOURCE_LOADER, "custom" ); 
+			Velocity.setProperty( "custom.resource.loader.class", FileGenLoader.class.getName() ); 
 			Velocity.setProperty( RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS, ClePlugin.isLogEnabled()
-				? SimpleLog4JLogSystem.class.getName() : "org.apache.velocity.runtime.log.NullLogSystem" ); //$NON-NLS-1$
+				? SimpleLog4JLogSystem.class.getName() : "org.apache.velocity.runtime.log.NullLogSystem" ); 
 			Velocity.init();
 		}
 		catch( final Exception e ) {

@@ -1,7 +1,5 @@
-package pi.eclipse.cle.builders;
 
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_DUMP;
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_QUIET;
+package pi.eclipse.cle.builders;
 
 import java.io.BufferedReader;
 import java.io.CharArrayReader;
@@ -12,38 +10,33 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import JFlex.Main;
-import JFlex.Options;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_DUMP;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_QUIET;
 
+import jflex.Main;
 import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.properties.LexPrefs;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexBuilder
 extends AbstractBuilder
 {
-	public static final String	ID	= ClePlugin.ID + "." + "LexBuilder";	//$NON-NLS-1$ //$NON-NLS-2$
+
+	public static final String ID = ClePlugin.ID + "." + "LexBuilder"; 
 
 	public LexBuilder()
 	{
 		super( "lex" );
 	}
 
-	/**
-	 * @param ln
-	 * @param br
-	 * @param resource
-	 * @throws IOException
-	 */
 	private void addLexError( IResource resource, String ln, BufferedReader br ) throws IOException
 	{
 		int lineValue = 0;
 		String string = ln;
 
-		if( ln.endsWith( ": " ) ) { //$NON-NLS-1$
-			final int lineIndex = ln.indexOf( "(line " ); //$NON-NLS-1$
+		if( ln.endsWith( ": " ) ) { 
+			final int lineIndex = ln.indexOf( "(line " ); 
 
 			if( lineIndex > 0 ) {
 				final int endIndex = ln.indexOf( ')', lineIndex );
@@ -77,7 +70,7 @@ extends AbstractBuilder
 		File fDest = dest.getLocation().toFile();
 		final String[] packageAndClass = findPackageAndClass( iFile );
 
-		if( (packageAndClass[0] != null) && (packageAndClass[1] != null) ) {
+		if( ( packageAndClass[0] != null ) && ( packageAndClass[1] != null ) ) {
 			fDest = new File( fDest, packageAndClass[0].replace( '.', File.separatorChar ) );
 
 			fDest = new File( fDest, packageAndClass[1] + ".java" );
@@ -92,8 +85,7 @@ extends AbstractBuilder
 	 *      org.eclipse.core.resources.IResource)
 	 */
 	@Override
-	protected void createJavaSource( IProgressMonitor progressMonitor, IResource resource )
-	throws IOException, CoreException
+	protected void createJavaSource( IProgressMonitor progressMonitor, IResource resource ) throws IOException, CoreException
 	{
 		final LexPrefs pref = new LexPrefs( resource );
 		final File iFile = resource.getLocation().toFile();
@@ -111,35 +103,35 @@ extends AbstractBuilder
 			fDest = new File( fDest, packageName.replace( '.', File.separatorChar ) );
 		}
 
-		args.append( " -d" ); //$NON-NLS-1$
-		args.append( " \"" + fDest.getAbsolutePath() + "\"" ); //$NON-NLS-1$ //$NON-NLS-2$
-		args.append( " --nobak" ); //$NON-NLS-1$
+		args.append( " -d" ); 
+		args.append( " \"" + fDest.getAbsolutePath() + "\"" ); 
+		args.append( " --nobak" ); 
 
 		if( pref.getSkipMin() ) {
-			args.append( " --nomin" ); //$NON-NLS-1$
+			args.append( " --nomin" ); 
 		}
 		if( pref.getComply() ) {
-			args.append( " --jlex" ); //$NON-NLS-1$
+			args.append( " --jlex" ); 
 		}
-		switch( pref.getCodeMethod() ) {
-			case Options.PACK:
-				args.append( " --pack" ); //$NON-NLS-1$
-				break;
-			case Options.TABLE:
-				args.append( " --table" ); //$NON-NLS-1$
-				break;
-			case Options.SWITCH:
-				args.append( " --switch" ); //$NON-NLS-1$
-				break;
-		}
+		//		switch( pref.getCodeMethod() ) {
+		//			case Options.PACK:
+		//				args.append( " --pack" ); 
+		//				break;
+		//			case Options.TABLE:
+		//				args.append( " --table" ); 
+		//				break;
+		//			case Options.SWITCH:
+		//				args.append( " --switch" ); 
+		//				break;
+		//		}
 		if( LEX_DUMP.getBoolean() ) {
-			args.append( " --dump" ); //$NON-NLS-1$
+			args.append( " --dump" ); 
 		}
 		if( LEX_QUIET.getBoolean() ) {
-			args.append( " --quiet" ); //$NON-NLS-1$
+			args.append( " --quiet" ); 
 		}
 
-		args.append( " \"" + iFile.getAbsolutePath() + "\"" ); //$NON-NLS-1$ //$NON-NLS-2$
+		args.append( " \"" + iFile.getAbsolutePath() + "\"" ); 
 
 		fDest.mkdirs();
 

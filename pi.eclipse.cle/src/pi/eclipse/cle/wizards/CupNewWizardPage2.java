@@ -10,7 +10,6 @@ import pi.eclipse.cle.properties.CupPrefs;
 import pi.eclipse.cle.properties.CupPrefsWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CupNewWizardPage2
 extends AbstractWizardPage
@@ -21,7 +20,7 @@ extends AbstractWizardPage
 	 */
 	protected CupNewWizardPage2( IContainer container )
 	{
-		super( container, "page-2" ); //$NON-NLS-1$
+		super( container, "page-2" ); 
 
 		setPageComplete( false );
 	}
@@ -63,8 +62,8 @@ extends AbstractWizardPage
 
 				final String javaName = ClePlugin.toJavaName( getWizard().getFileName(), true );
 
-				getControl().setParserClass( javaName + "Cup" ); //$NON-NLS-1$
-				getControl().setSymClass( javaName + "Sym" ); //$NON-NLS-1$
+				getControl().setParserClass( javaName + "Cup" ); 
+				getControl().setSymClass( javaName + "Sym" ); 
 			}
 		}
 	}

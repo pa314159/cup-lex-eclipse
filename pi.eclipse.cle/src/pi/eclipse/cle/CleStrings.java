@@ -5,13 +5,12 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class CleStrings
 {
 	private static final CleLog		L				= new CleLog( CleStrings.class );
 
-	private static final String		BUNDLE_NAME		= "pi.eclipse.cle.translations";	//$NON-NLS-1$
+	private static final String		BUNDLE_NAME		= "pi.eclipse.cle.translations";	
 
 	private static ResourceBundle	RESOURCE_BUNDLE	= null;
 
@@ -30,10 +29,10 @@ public class CleStrings
 			}
 		}
 		catch( final MissingResourceException e ) {
-			L.warn( e, "%s", key ); //$NON-NLS-1$
+			L.warn( e, "%s", key ); 
 		}
 		catch( final IllegalArgumentException e ) {
-			L.warn( e, "%s", key ); //$NON-NLS-1$
+			L.warn( e, "%s", key ); 
 		}
 
 		return '!' + key + '!';

@@ -1,9 +1,5 @@
-package pi.eclipse.cle.properties;
 
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_CODE_METHOD;
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_COMPLY_JLEX;
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_OUTPUT;
-import static pi.eclipse.cle.preferences.ClePreferences.LEX_SKIP_MIN;
+package pi.eclipse.cle.properties;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.swt.SWT;
@@ -18,40 +14,42 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import JFlex.Options;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_CODE_METHOD;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_COMPLY_JLEX;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_OUTPUT;
+import static pi.eclipse.cle.preferences.ClePreferences.LEX_SKIP_MIN;
 
 import pi.eclipse.cle.ClePlugin;
 import pi.eclipse.cle.CleStrings;
 import pi.eclipse.cle.util.AbstractWidget;
 
 /**
- * @author <a href="mailto:pa314159&#64;sf.net">Paπ &lt;pa314159&#64;sf.net&gt;</a>
  */
 public class LexPrefsWidget
 extends AbstractWidget
 {
 
-	private LexPrefs	preferences;
+	private LexPrefs preferences;
 
-	private Label		lxJavaFolder	= null;
+	private Label lxJavaFolder = null;
 
-	private Text		txJavaFolder	= null;
+	private Text txJavaFolder = null;
 
-	private Button		btJavaFolder	= null;
+	private Button btJavaFolder = null;
 
-	private Group		groupOptions	= null;
+	private Group groupOptions = null;
 
-	private Button		ckSkipMin		= null;
+	private Button ckSkipMin = null;
 
-	private Button		ckComply		= null;
+	private Button ckComply = null;
 
-	private Button		brPack			= null;
+	private Button brPack = null;
 
-	private Button		brTable			= null;
+	private Button brTable = null;
 
-	private Button		brSwitch		= null;
+	private Button brSwitch = null;
 
-	private Group		groupCode		= null;
+	private Group groupCode = null;
 
 	/**
 	 * @param parent
@@ -81,7 +79,7 @@ extends AbstractWidget
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void performApply()
 	{
@@ -91,14 +89,14 @@ extends AbstractWidget
 			this.preferences.setSkipMin( this.ckSkipMin.getSelection() );
 			this.preferences.setComply( this.ckComply.getSelection() );
 
-			this.preferences.setCodeMethod( Options.PACK );
-
-			if( this.brTable.getSelection() ) {
-				this.preferences.setCodeMethod( Options.TABLE );
-			}
-			if( this.brSwitch.getSelection() ) {
-				this.preferences.setCodeMethod( Options.SWITCH );
-			}
+			//			this.preferences.setCodeMethod( Options.PACK );
+			//
+			//			if( this.brTable.getSelection() ) {
+			//				this.preferences.setCodeMethod( Options.TABLE );
+			//			}
+			//			if( this.brSwitch.getSelection() ) {
+			//				this.preferences.setCodeMethod( Options.SWITCH );
+			//			}
 
 			this.preferences.flush();
 		}
@@ -137,7 +135,7 @@ extends AbstractWidget
 	{
 		if( isOutputVisible()
 			&& !ClePlugin.isJavaFolder( this.preferences.getEclipseProject(), this.txJavaFolder.getText() ) ) {
-			fireWidgetModified( CleStrings.get( "java-folder-required" ) ); //$NON-NLS-1$
+			fireWidgetModified( CleStrings.get( "java-folder-required" ) );
 
 			return;
 		}
@@ -173,14 +171,14 @@ extends AbstractWidget
 		this.groupCode.setLayoutData( gridData );
 
 		this.brPack = new Button( this.groupCode, SWT.RADIO );
-		this.brPack.setText( CleStrings.get( "preference-lex-pack" ) ); // Generated //$NON-NLS-1$
-		// //$NON-NLS-1$
+		this.brPack.setText( CleStrings.get( "preference-lex-pack" ) ); // Generated
+		//
 		this.brTable = new Button( this.groupCode, SWT.RADIO );
-		this.brTable.setText( CleStrings.get( "preference-lex-table" ) ); // Generated //$NON-NLS-1$
-		// //$NON-NLS-1$
+		this.brTable.setText( CleStrings.get( "preference-lex-table" ) ); // Generated
+		//
 		this.brSwitch = new Button( this.groupCode, SWT.RADIO );
-		this.brSwitch.setText( CleStrings.get( "preference-lex-switch" ) ); // Generated //$NON-NLS-1$
-		// //$NON-NLS-1$
+		this.brSwitch.setText( CleStrings.get( "preference-lex-switch" ) ); // Generated
+		//
 	}
 
 	/**
@@ -206,8 +204,8 @@ extends AbstractWidget
 
 		this.groupOptions = new Group( this, SWT.NONE );
 
-		this.groupOptions.setText( CleStrings.get( "preference-lex-general-options" ) ); // Generated //$NON-NLS-1$
-		// //$NON-NLS-1$
+		this.groupOptions.setText( CleStrings.get( "preference-lex-general-options" ) ); // Generated
+		//
 		this.groupOptions.setLayout( rowLayout ); // Generated
 		this.groupOptions.setLayoutData( gridData ); // Generated
 
@@ -215,11 +213,11 @@ extends AbstractWidget
 		this.ckSkipMin.setText( LEX_SKIP_MIN.toLabel() ); // Generated
 		this.ckComply = new Button( this.groupOptions, SWT.CHECK );
 		this.ckComply.setText( LEX_COMPLY_JLEX.toLabel() ); // Generated
-		// //$NON-NLS-1$
+		//
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected void fillValues()
 	{
@@ -231,18 +229,18 @@ extends AbstractWidget
 			this.ckSkipMin.setSelection( this.preferences.getSkipMin() );
 			this.ckComply.setSelection( this.preferences.getComply() );
 
-			switch( this.preferences.getCodeMethod() ) {
-				default:
-					this.brPack.setSelection( true );
-					break;
-
-				case Options.TABLE:
-					this.brTable.setSelection( true );
-					break;
-
-				case Options.SWITCH:
-					this.brSwitch.setSelection( true );
-			}
+			//			switch( this.preferences.getCodeMethod() ) {
+			//				default:
+			//					this.brPack.setSelection( true );
+			//				break;
+			//
+			//				case Options.TABLE:
+			//					this.brTable.setSelection( true );
+			//				break;
+			//
+			//				case Options.SWITCH:
+			//					this.brSwitch.setSelection( true );
+			//			}
 		}
 	}
 
@@ -264,23 +262,26 @@ extends AbstractWidget
 		this.txJavaFolder = new Text( this, SWT.BORDER );
 		this.txJavaFolder.setLayoutData( gridData ); // Generated
 		this.txJavaFolder.addModifyListener( new org.eclipse.swt.events.ModifyListener()
+		{
+
+			@Override
+			public void modifyText( org.eclipse.swt.events.ModifyEvent e )
 			{
-				public void modifyText( org.eclipse.swt.events.ModifyEvent e )
-				{
-					updateWidgetContainer();
-				}
-			} );
+				updateWidgetContainer();
+			}
+		} );
 
 		this.btJavaFolder = new Button( this, SWT.NONE );
-		this.btJavaFolder.setText( "..." ); // Generated //$NON-NLS-1$
+		this.btJavaFolder.setText( "..." ); // Generated
 		this.btJavaFolder.addSelectionListener( new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected( SelectionEvent e )
 			{
-				@Override
-				public void widgetSelected( SelectionEvent e )
-				{
-					selectJavaFolder( e );
-				}
-			} );
+				selectJavaFolder( e );
+			}
+		} );
 
 		createGroupOptions();
 		createGroupCode();
@@ -300,12 +301,12 @@ extends AbstractWidget
 			this.txJavaFolder.setText( selected.getProjectRelativePath().toPortableString() );
 		}
 		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+			this.txJavaFolder.setText( "" );
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	void performDefaults()
 	{
@@ -323,19 +324,19 @@ extends AbstractWidget
 
 				case 0:
 					this.brPack.setSelection( true );
-					break;
+				break;
 
 				case 1:
 					this.brTable.setSelection( true );
-					break;
+				break;
 
 				case 2:
 					this.brSwitch.setSelection( true );
-					break;
+				break;
 			}
 		}
 		else {
-			this.txJavaFolder.setText( "" ); //$NON-NLS-1$
+			this.txJavaFolder.setText( "" );
 		}
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"

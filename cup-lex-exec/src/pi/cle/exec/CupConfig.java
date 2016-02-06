@@ -1,3 +1,4 @@
+
 package pi.cle.exec;
 
 import java.io.File;
@@ -9,15 +10,16 @@ import org.apache.tools.ant.Target;
 public class CupConfig
 extends AbstractConfig
 {
-	private final CUPTask	task	= new CUPTask();
 
-	private String			parserSuffix;
+	private final CUPTask task = new CUPTask();
 
-	private String			symbolsSuffix;
+	private String parserSuffix;
 
-	private String			parserClass;
+	private String symbolsSuffix;
 
-	private String			symbolsClass;
+	private String parserClass;
+
+	private String symbolsClass;
 
 	public CupConfig()
 	{
@@ -46,7 +48,7 @@ extends AbstractConfig
 			t.setParser( base + this.parserSuffix );
 		}
 		else {
-			t.setSymbols( this.parserClass );
+			t.setParser( this.parserClass );
 		}
 
 		if( this.symbolsClass == null ) {
@@ -131,10 +133,6 @@ extends AbstractConfig
 		this.task.setNowarn( argNowarn );
 	}
 
-	/**
-	 * @param parserClass
-	 *            the parserClass to set
-	 */
 	public void setParserClass( String parserClass )
 	{
 		this.parserClass = parserClass;
@@ -155,10 +153,6 @@ extends AbstractConfig
 		this.task.setQuiet( argquiet );
 	}
 
-	/**
-	 * @param symbolsClass
-	 *            the symbolsClass to set
-	 */
 	public void setSymbolsClass( String symbolsClass )
 	{
 		this.symbolsClass = symbolsClass;
@@ -173,5 +167,20 @@ extends AbstractConfig
 	{
 		this.task.setTime( argTime );
 	}
+
+	//	public void setGenericLabels( boolean genericlabels )
+	//	{
+	//		this.task.setGenericlabels( genericlabels );
+	//	}
+
+	public void setPackage( String arg_package )
+	{
+		this.task.setPackage( arg_package );
+	}
+
+	//	public void setXmlActions( boolean xmlactions )
+	//	{
+	//		this.task.setXmlactions( xmlactions );
+	//	}
 
 }
