@@ -84,7 +84,7 @@
 
 	<modules>
 		<module>cup-lex-exec</module>
-		<module>maven-cup-lex-plugin</module>
+		<module>cup-lex-maven-plugin</module>
 		<module>pi.eclipse.cle</module>
 		<module>pi.eclipse.cle.feature</module>
 		<module>pi.eclipse.cle.site</module>
