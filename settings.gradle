@@ -1,0 +1,8 @@
+rootProject.name = 'cup-lex-eclipse'
+
+include( 'cup-lex-exec' )
+include( 'cup-lex-maven-plugin' )
+//include( 'cup-lex-gradle-plugin' )
+include( 'pi.eclipse.cle' )
+include( 'pi.eclipse.cle.feature' )
+include( 'pi.eclipse.cle.site' )

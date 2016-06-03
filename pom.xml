@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf</groupId>
 	<artifactId>cup-lex-eclipse</artifactId>
@@ -66,7 +65,7 @@
 			<url>${cle-snapshots-url}</url>
 			<uniqueVersion>true</uniqueVersion>
 		</snapshotRepository>
- 		<site>
+		<site>
 			<id>cle-site</id>
 			<url>${cle-site-url}</url>
 		</site>
@@ -78,7 +77,7 @@
 		<java.version>1.6</java.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version-suffix>20120327-1800</version-suffix>
+		<version-suffix>20160616</version-suffix>
 		<site-sources>${project.build.directory}/site-sources</site-sources>
 	</properties>
 
@@ -93,7 +92,7 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 
-		<sourceDirectory>${basedir}/src</sourceDirectory>
+		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<testSourceDirectory>${basedir}/tests</testSourceDirectory>
 		<scriptSourceDirectory>etc</scriptSourceDirectory>
 
@@ -134,6 +133,11 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.6</version>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -146,7 +150,7 @@
 					<version>3.4</version>
 				</plugin>
 
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -344,20 +348,24 @@
 				<version>1.6.1</version>
 			</dependency>
 			<dependency>
-				<groupId>java-cup</groupId>
+				<groupId>com.github.vbmacher</groupId>
 				<artifactId>java-cup</artifactId>
-				<version>0.11a-beta-20060608</version>
+				<version>11b-20151001</version>
 			</dependency>
 			<dependency>
-				<groupId>java-cup</groupId>
-				<artifactId>java-cup</artifactId>
-				<version>0.11a-beta-20060608</version>
-				<classifier>runtime</classifier>
+				<groupId>com.github.vbmacher</groupId>
+				<artifactId>java-cup-runtime</artifactId>
+				<version>11b-20151001</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.ant</groupId>
 				<artifactId>ant</artifactId>
 				<version>1.7.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.7</version>
 			</dependency>
 
 			<dependency>

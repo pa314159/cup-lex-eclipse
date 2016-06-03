@@ -1,0 +1,121 @@
+import static groovy.io.FileType.*
+
+
+apply( plugin: 'java' )
+
+dependencies {
+	libs( 'com.github.vbmacher:java-cup-runtime' )
+	libs( project( ':cup-lex-exec' ) )
+	libs( 'org.apache.velocity:velocity' )
+
+	provided( configurations.libs )
+
+	provided( 'org.eclipse:org.eclipse.debug.core:3.4.1.v20090106_r342')
+	provided( 'org.eclipse:org.eclipse.jface:3.4.2.M20090107-0800')
+	provided( 'org.eclipse:org.eclipse.jdt.launching:3.4.1.v20080729_r341')
+	provided( 'org.eclipse:org.eclipse.jdt.core:3.4.4.v_894_R34x')
+	provided( 'org.eclipse:org.eclipse.jdt.ui:3.4.2.r342_v20090107-0800')
+	provided( 'org.eclipse:org.eclipse.ui:3.4.2.M20090204-0800')
+	provided( 'org.eclipse:org.eclipse.ui.ide:3.4.2.M20090127-1700')
+	provided( 'org.eclipse:org.eclipse.ui.views:3.3.1.M20081112-0800')
+	provided( 'org.eclipse:org.eclipse.ui.workbench:3.4.2.M20090127-1700')
+	provided( 'org.eclipse:org.eclipse.ui.workbench.texteditor:3.4.1.r341_v20080827-1100')
+	provided( 'org.eclipse:org.eclipse.ui.editors:3.4.0.v20080603-2000')
+	provided( 'org.eclipse:org.eclipse.swt:3.4.2.v3452b')
+	provided( 'org.eclipse:org.eclipse.core.filebuffers:3.4.0.v20080603-2000')
+	provided( 'org.eclipse:org.eclipse.core.resources:3.4.2.R34x_v20090126')
+	provided( 'org.eclipse:org.eclipse.core.runtime:3.4.0.v20080512')
+	provided( 'org.eclipse:org.eclipse.core.commands:3.4.0.I20080509-2000')
+	provided( 'org.eclipse:org.eclipse.core.jobs:3.4.1.R34x_v20081128')
+	provided( 'org.eclipse:org.eclipse.equinox.preferences:3.2.201.R34x_v20080709')
+	provided( 'org.eclipse:org.eclipse.equinox.registry:3.4.0.v20080516-0950')
+	provided( 'org.eclipse:org.eclipse.equinox.common:3.4.0.v20080421-2006')
+	provided( 'org.eclipse:org.eclipse.osgi:3.4.3.R34x_v20081215-1030')
+	provided( 'org.eclipse:org.eclipse.text:3.4.0.v20080605-1800')
+	provided( 'org.eclipse:org.eclipse.jface.text:3.4.2.r342_v20081119-0800')
+	provided( 'net.sf.swtswing:swtswing:3.2.0005')
+}
+
+def gen = "$buildDir/generated-sources/cle"
+
+task initSrc( group: 'build' ) {
+	dependsOn( ':cup-lex-exec:classes' )
+
+	doLast {
+		ant {
+			taskdef( name: 'cup', classname: 'java_cup.anttask.CUPTask', classpath: configurations.compile.asPath )
+			taskdef( name: 'lex', classname: 'jflex.anttask.JFlexTask', classpath: configurations.compile.asPath )
+
+			def res = [
+				new File("${rootProject.projectDir}/cup-lex-exec/build/classes/main" ).toURL()
+			] as URL[]
+			def cld = new URLClassLoader( res, Thread.currentThread().contextClassLoader );
+			def tjn = cld.loadClass( 'pi.cle.exec.CupLexUtil' ).getMethod( 'toJavaName', String, boolean);
+			def etc = new File("$projectDir/etc");
+
+			etc.eachFileMatch( FILES, ~/.+\.(cup|lex)$/ ) { f ->
+				if( f.name.endsWith( '.cup' ) ) {
+					String name = tjn.invoke(null, f.name.replace( '.cup', ''), true);
+
+					cup( srcfile: f, destdir: gen, parser: name, symbols: "${name}Sym", interface: true )
+				}
+				if( f.name.endsWith( '.lex' ) ) {
+					lex( file: f, destdir: file( gen ) )
+				}
+			}
+		}
+	}
+}
+
+task initLib( group: 'build', type: Copy ) {
+	copy {
+		from( configurations.libs )
+		into( 'lib' )
+	}
+}
+
+sourceSets {
+	main {
+		java { srcDir( gen ) }
+	}
+}
+
+jar {
+	dependsOn( initLib )
+
+	def tree = fileTree( projectDir ) {
+		include( 'plugin.*' )
+		include( 'doc/**' )
+		include( 'icons/**' )
+		include( 'lib/**' )
+	}
+
+	from( tree )
+
+	manifest {
+		from( 'META-INF/MANIFEST.MF' ) {
+			eachEntry { ent ->
+				if( ent.key == 'Bundle-Version' ) {
+					ent.value = "${pluginVersion}"
+				}
+				if( ent.key == 'Bundle-ClassPath' ) {
+					ent.value = '.,' + configurations.libs.collect { "lib/$it.name" }.join( ',' )
+				}
+			}
+		}
+	}
+}
+
+eclipse {
+	project {
+		natures( 'org.eclipse.pde.PluginNature' )
+		buildCommand( 'org.eclipse.pde.ManifestBuilder' )
+		buildCommand( 'org.eclipse.pde.SchemaBuilder' )
+
+		natures( 'org.eclipse.pde.api.tools.apiAnalysisNature' )
+		buildCommand( 'org.eclipse.pde.api.tools.apiAnalysisNature' )
+	}
+}
+
+compileJava.dependsOn( initSrc )
+eclipseClasspath.dependsOn( initLib )

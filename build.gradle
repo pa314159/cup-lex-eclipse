@@ -1,0 +1,59 @@
+
+buildscript {
+	dependencies {
+		classpath( 'io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE' )
+		classpath( 'pl.allegro.tech.build:axion-release-plugin:1.3.4' )
+		classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.0.3'
+	}
+}
+
+ext {
+	isRelease = Boolean.getBoolean( 'CreateRelease' )
+	buildTime = new java.text.SimpleDateFormat( 'YYYYMMdd' ).format( new Date() )
+}
+
+allprojects {
+	apply( plugin: 'eclipse' )
+	apply( plugin: 'pl.allegro.tech.build.axion-release' )
+
+	group = 'net.sf.cle'
+	
+	if( rootProject.isRelease ) {
+		version = scmVersion.version.replace('-SNAPSHOT', '')
+	}
+	else {
+		version = scmVersion.version
+	}
+
+	ext { pluginVersion = "${project.version}-${rootProject.buildTime}" }
+
+	eclipse {
+		project {
+			natures( 'org.eclipse.buildship.core.gradleprojectnature' )
+			buildCommand( 'org.eclipse.buildship.core.gradleprojectbuilder' )
+		}
+	}
+}
+
+subprojects { sub ->
+	sub.apply( from: "${rootProject.projectDir}/dependencies.gradle" )
+	sub.apply( plugin: 'nebula.provided-base')
+
+	sub.configurations.create( 'default' )
+	sub.configurations.create( 'libs' )
+
+	sub.plugins.withType( JavaPlugin ) {
+		sub.eclipse {
+			classpath {
+				defaultOutputDir = sub.file( 'build/classes/default' )
+			}
+		}
+		
+		sub.sourceCompatibility = JavaVersion.VERSION_1_6
+		sub.targetCompatibility = JavaVersion.VERSION_1_6
+		
+		sub.sourceSets.all {
+			output.resourcesDir = output.classesDir
+		}
+	}
+}

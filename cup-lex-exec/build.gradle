@@ -1,0 +1,7 @@
+
+apply( plugin: 'java' )
+
+dependencies {
+	compile( 'de.jflex:jflex' )
+	compile( 'com.github.vbmacher:java-cup' )
+}

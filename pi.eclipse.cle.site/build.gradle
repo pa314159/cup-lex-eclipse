@@ -1,0 +1,33 @@
+
+eclipse {
+	project {
+		natures( 'org.eclipse.pde.UpdateSiteNature' )
+		buildCommand( 'org.eclipse.pde.UpdateSiteBuilder' )
+	}
+}
+
+task site {
+	dependsOn( ':pi.eclipse.cle.feature:jar' )
+
+	doLast {
+		copy {
+			from( projectDir )
+			include( 'site.*' )
+			into( "$buildDir/site-sources/resources" )
+			filter { it.replace( '0.1.2.3-VERSIONSUFFIX', pluginVersion ) }
+		}
+		copy {
+			from( files( "${project( ':pi.eclipse.cle' ).buildDir}/libs/pi.eclipse.cle-${project.version}.jar" ) )
+			into( "$buildDir/site-sources/resources/plugins" )
+			rename { "pi.eclipse.cle_${pluginVersion}.jar"  }
+		}
+		copy {
+			from( files( "${project( ':pi.eclipse.cle.feature' ).buildDir}/libs/pi.eclipse.cle.feature-${project.version}.jar" ) )
+			into( "$buildDir/site-sources/resources/features" )
+			rename { "pi.eclipse.cle_${pluginVersion}.jar"  }
+		}
+	}
+}
+
+task build { dependsOn( site ) }
+task clean( type: Delete ) { delete( buildDir ) }

@@ -1,0 +1,37 @@
+
+eclipse {
+	project {
+		natures( 'org.eclipse.pde.FeatureNature' )
+		buildCommand( 'org.eclipse.pde.FeatureBuilder' )
+	}
+}
+
+task prepareJar {
+	dependsOn( ':pi.eclipse.cle:jar' )
+
+	doLast {
+		copy {
+			from( projectDir )
+			into( "$buildDir/resources" )
+			includeEmptyDirs = false
+			include( 'feature.*' )
+			filter { it.replace( '0.1.2.3-VERSIONSUFFIX', pluginVersion ) }
+		}
+	}
+}
+
+task jar( type: Jar, group: 'build', description: 'creates the feature jar' ) {
+	dependsOn( prepareJar )
+
+	baseName = project.name
+	version = project.version
+	extension = 'jar'
+
+	destinationDir = file( "${buildDir}/libs" )
+
+	from( fileTree( "$buildDir/resources" ) )
+}
+
+task assembly { dependsOn( jar ) }
+task build { dependsOn( assembly ) }
+task clean( type: Delete ) { delete( buildDir ) }

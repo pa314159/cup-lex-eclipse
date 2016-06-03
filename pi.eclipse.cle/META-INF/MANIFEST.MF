@@ -10,7 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.variables,
  org.eclipse.debug.core,
  org.eclipse.jdt.core,
- org.eclipse.jdt.ui,
  org.eclipse.jdt.launching,
  org.eclipse.jface.text,
  org.eclipse.ui,
@@ -21,12 +20,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench.texteditor
 Eclipse-AutoStart: true
 Bundle-ClassPath: .,
+ lib/ant-1.7.1.jar,
+ lib/ant-launcher-1.7.1.jar,
  lib/commons-collections-3.2.1.jar,
  lib/commons-lang-2.4.jar,
- lib/java-cup-0.11a-beta-20060608.jar,
- lib/jflex-1.4.3.jar,
- lib/oro-2.0.8.jar,
- lib/velocity-1.6.2.jar,
- lib/ant-1.7.1.jar,
- lib/cup-lex-exec-0.1.8.0-SNAPSHOT.jar
+ lib/cup-lex-exec-1.0.0-SNAPSHOT.jar,
+ lib/java-cup-runtime-11b-20151001.jar,
+ lib/java-cup-11b-20151001.jar,
+ lib/jflex-1.6.1.jar,
+ lib/velocity-1.7.jar
 Bundle-Vendor: %pluginProvider

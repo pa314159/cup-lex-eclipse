@@ -4,12 +4,6 @@ target/
 build/
 lib/
 classes/
-*.log
-*.tmp
-*.jdbc
-local.properties
-.project
-.classpath
-.settings/
-.external*
-DESCRIPTION.txt
+.*
+!/.gitignore
+!/.travis.xml

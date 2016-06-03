@@ -66,14 +66,16 @@ extends AbstractMojo
 			ds.setExcludes( this.excludes );
 		}
 
-		ds.scan();
+		if( this.outputDirectory != null && this.outputDirectory.exists() ) {
+			ds.scan();
 
-		for( final String f : ds.getIncludedFiles() ) {
-			try {
-				updateVersion( f );
-			}
-			catch( final IOException e ) {
-				throw new MojoExecutionException( f, e );
+			for( final String f : ds.getIncludedFiles() ) {
+				try {
+					updateVersion( f );
+				}
+				catch( final IOException e ) {
+					throw new MojoExecutionException( f, e );
+				}
 			}
 		}
 	}
